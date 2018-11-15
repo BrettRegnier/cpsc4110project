@@ -2,6 +2,7 @@
 #define COMPLEXNUMBER_HH
 
 #include <string>
+#include <cmath>
 
 namespace ComplexSpace
 {
@@ -12,17 +13,17 @@ namespace ComplexSpace
             float imaginary;
             int exponent;
 
-            std::string ComplexString;
 
-        public:
-            ComplexNumber();
+    public:
+ 
+            ComplexNumber(float r=0, float i=0);
             ~ComplexNumber();
 
-            ComplexNumber Add(ComplexNumber x, ComplexNumber y);
-            ComplexNumber Product(ComplexNumber x, ComplexNumber y);
+            ComplexNumber Add(ComplexNumber x);
+            ComplexNumber Product(ComplexNumber x);
 
-            float Modulus(ComplexNumber x);
-            ComplexNumber Conjugate(ComplexNumber x);
+            float Modulus();
+            ComplexNumber Conjugate();
     };
 }
 
