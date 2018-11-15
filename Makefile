@@ -1,4 +1,4 @@
-CC := g++
+CC := g++ -std=c++11
 SRC_DIR := ./src
 BIN_DIR := ./bin
 SRC_FILES := $(wildcard $(SRC_DIR)/*.cc)
