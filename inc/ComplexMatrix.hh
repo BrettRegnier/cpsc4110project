@@ -22,7 +22,8 @@ namespace ComplexSpace
             int Column();
 
 
-        public:
+    public:
+       ComplexMatrix();
             ComplexMatrix(int r, int c);
             ComplexMatrix(std::vector<ComplexVector> k);
             ~ComplexMatrix();

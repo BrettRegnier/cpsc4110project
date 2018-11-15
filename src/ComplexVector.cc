@@ -1,4 +1,5 @@
 #include "ComplexVector.hh"
+
 using namespace ComplexSpace;
 
 ComplexVector::ComplexVector(std::vector<ComplexNumber> k)
@@ -14,9 +15,33 @@ ComplexVector::ComplexVector(int s)
     }
 }
 
-ComplexVector::ComplexVector(){}
+ComplexVector::ComplexVector()
+{
+}
 
-ComplexVector::~ComplexVector(){}
+ComplexVector::~ComplexVector()
+{
+}
+
+
+ComplexVector ComplexVector::Add(ComplexVector A)
+{
+    ComplexVector temp = ComplexVector();
+  
+   if (size() == A.size())
+   {
+      for(int i=0; i< A.size(); i++)
+      {
+	 temp.Insert( A.v[i].Add(v[i]));
+      }           
+   }
+   else
+   {
+      //error
+   }
+   
+   return temp;
+}
 
 ComplexNumber ComplexVector::DotProduct(ComplexVector A)
 {
