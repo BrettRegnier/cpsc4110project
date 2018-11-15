@@ -18,11 +18,11 @@ namespace ComplexSpace
             ComplexNumber();
             ~ComplexNumber();
 
-            ComplexNumber Add(ComplexNumber x, ComplexNumber y);
-            ComplexNumber Product(ComplexNumber x, ComplexNumber y);
+            ComplexNumber Add(ComplexNumber x);
+            ComplexNumber Product(ComplexNumber x);
 
-            float Modulus(ComplexNumber x);
-            ComplexNumber Conjugate(ComplexNumber x);
+            float Modulus();
+            ComplexNumber Conjugate();
     };
 }
 
