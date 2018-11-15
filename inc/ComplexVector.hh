@@ -12,11 +12,16 @@ namespace ComplexSpace
             std::vector<ComplexNumber> v;
 
         public:
-            ComplexVector(std::vector<ComplexNumber> A);
+            ComplexVector(std::vector<ComplexNumber> k);
+            ComplexVector(int s);
+            ComplexVector();
             ~ComplexVector();
 
             ComplexVector Add(ComplexVector A);
-            ComplexVector DotProduct(ComplexVector B);
+            ComplexNumber DotProduct(ComplexVector A);
+            ComplexVector Conjugate();
+            void Insert(ComplexNumber i);
+            int size();
     };
 }
 

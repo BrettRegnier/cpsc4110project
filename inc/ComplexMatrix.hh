@@ -10,7 +10,8 @@ namespace ComplexSpace
     {
         private:
             /* Variables */
-            std::vector<ComplexVector> Matrix;
+            // v[row][column]
+            std::vector<ComplexVector> v;
 
             bool CheckDimension(ComplexMatrix A);
             bool IsSquare(ComplexMatrix A);
@@ -23,6 +24,7 @@ namespace ComplexSpace
 
         public:
             ComplexMatrix(int r, int c);
+            ComplexMatrix(std::vector<ComplexVector> k);
             ~ComplexMatrix();
 
             ComplexMatrix Add(ComplexMatrix A);

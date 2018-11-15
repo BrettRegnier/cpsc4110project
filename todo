@@ -1,0 +1,8 @@
+1. Create menu struct in main, with 4 options
+    1. Complex Number
+    2. Complex Vector
+    3. Complex Matrix
+    4. Quit
+
+2. Parser, expect a two value string of x,y
+    where x = real and y = imaginary.
