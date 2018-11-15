@@ -11,8 +11,6 @@ namespace ComplexSpace
         private:
             float real;
             float imaginary;
-            int exponent;
-
 
     public:
  
@@ -24,6 +22,12 @@ namespace ComplexSpace
 
             float Modulus();
             ComplexNumber Conjugate();
+
+            float Real();
+            float Imaginary();
+
+            void Real(float r);
+            void Imaginary(float i);
     };
 }
 
