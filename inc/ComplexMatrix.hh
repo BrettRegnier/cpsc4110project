@@ -13,27 +13,31 @@ namespace ComplexSpace
             /* Variables */
             std::vector<std::vector<ComplexNumber>> Matrix;
 
-            bool CheckDimension(std::vector<std::vector<ComplexNumber>> A, std::vector<std::vector<ComplexNumber> > B);
-            bool IsSquare(std::vector<std::vector<ComplexNumber> > A);
+            bool CheckDimension(std::vector<std::vector<ComplexNumber>> A);
+            bool IsSquare(std::vector<std::vector<ComplexNumber>> A);
 
             // First vector is row
             int Row();
             // Second vector is column
             int Column();
 
+
         public:
             ComplexMatrix();
             ~ComplexMatrix();
 
-            std::vector<ComplexNumber> Add(std::vector<ComplexNumber> A, std::vector<ComplexNumber> B);
-            std::vector<ComplexNumber> DotProduct(std::vector<ComplexNumber> A, std::vector<ComplexNumber> B);
+            std::vector<ComplexNumber> Add(std::vector<ComplexNumber> A);
+            std::vector<ComplexNumber> DotProduct(std::vector<ComplexNumber> A);
 
-            std::vector<std::vector<ComplexNumber> > Add(std::vector<std::vector<ComplexNumber> > A, std::vector<std::vector<ComplexNumber> > B);
-            std::vector<std::vector<ComplexNumber> > Multiplication(std::vector<std::vector<ComplexNumber> > A, std::vector<std::vector<ComplexNumber> > B);
+            std::vector<std::vector<ComplexNumber>> Add(std::vector<std::vector<ComplexNumber>> A);
+            std::vector<std::vector<ComplexNumber>> Multiplication(std::vector<std::vector<ComplexNumber>> A);
 
-            bool IsHermitian(std::vector<std::vector<ComplexNumber> > A);
+            bool IsHermitian();
 
-            std::vector<std::vector<ComplexNumber> > TensorProduct(std::vector<std::vector<ComplexNumber> > A, std::vector<std::vector<ComplexNumber> > B);
+            std::vector<std::vector<ComplexNumber>> TensorProduct(std::vector<std::vector<ComplexNumber>> A);
+            std::vector<std::vector<ComplexNumber>> Conjugate();
+            std::vector<std::vector<ComplexNumber>> Transpose();
+            std::vector<std::vector<ComplexNumber>> Adjoint();
     };
 }
 
