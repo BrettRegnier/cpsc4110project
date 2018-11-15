@@ -2,6 +2,7 @@
 #define COMPLEXVECTOR_HH
 
 #include <vector>
+#include "ComplexNumber.hh"
 
 namespace ComplexSpace
 {
@@ -12,7 +13,7 @@ namespace ComplexSpace
 
         public:
             ComplexVector(std::vector<ComplexNumber> A);
-            ~ComplexVecotr();
+            ~ComplexVector();
 
             std::vector<ComplexNumber> Add(std::vector<ComplexNumber> A);
             std::vector<ComplexNumber> DotProduct(std::vector<ComplexNumber> B);

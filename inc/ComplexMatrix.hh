@@ -2,8 +2,7 @@
 #define COMPLEXMATRIX_HH
 
 #include <vector>
-#include <string>
-#include "ComplexNumber.hh"
+#include "ComplexVector.hh"
 
 namespace ComplexSpace
 {
