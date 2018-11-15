@@ -12,10 +12,10 @@ EXE = quantum
 all: 
 	make dir
 	make clean
-	make Quantum
+	make quantum
 	make move
 
-Quantum: $(OBJ_FILES)
+quantum: $(OBJ_FILES)
 	$(CC) $(LDFLAGS) -o $@ $^
 
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.cc
