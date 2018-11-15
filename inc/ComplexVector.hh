@@ -15,8 +15,8 @@ namespace ComplexSpace
             ComplexVector(std::vector<ComplexNumber> A);
             ~ComplexVector();
 
-            std::vector<ComplexNumber> Add(std::vector<ComplexNumber> A);
-            std::vector<ComplexNumber> DotProduct(std::vector<ComplexNumber> B);
+            ComplexVector Add(ComplexVector A);
+            ComplexVector DotProduct(ComplexVector B);
     };
 }
 
