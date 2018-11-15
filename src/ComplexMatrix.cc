@@ -21,14 +21,20 @@ ComplexMatrix::~ComplexMatrix()
 ComplexMatrix ComplexMatrix::Add(ComplexMatrix A)
 {
     vector<ComplexVector> newMatrix = vector<ComplexVector>();
-    for(int i = 0; i < v.size(); i++)
+    if(CheckDimension(A))
     {
-        ComplexVector added = v[i].Add(A.v[i]);
-        newMatrix.push_back(added);
+        for(int i = 0; i < v.size(); i++)
+        {
+            ComplexVector added = v[i].Add(A.v[i]);
+            newMatrix.push_back(added);
+        }
+    }
+    else
+    {
+        // error
     }
 
     return ComplexMatrix(newMatrix);
-    
 }
 
 ComplexMatrix ComplexMatrix::Multiplication(ComplexMatrix A)
