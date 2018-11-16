@@ -11,6 +11,14 @@ ComplexNumber::~ComplexNumber()
 {
 }
 
+bool ComplexNumber::operator==(ComplexNumber& i)
+{
+    if (real == i.real && imaginary == i.imaginary)
+        return true;
+
+    return false;
+}
+
 ComplexNumber ComplexNumber::Add(ComplexNumber x)
 {
    ComplexNumber a;

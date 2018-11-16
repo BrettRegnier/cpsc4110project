@@ -28,6 +28,8 @@ namespace ComplexSpace
 
             void Real(float r);
             void Imaginary(float i);
+        
+            bool operator==(ComplexNumber& i);
     };
 }
 

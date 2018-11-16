@@ -15,15 +15,11 @@ namespace ComplexSpace
 
             bool CheckDimension(ComplexMatrix A);
             bool IsSquare(ComplexMatrix A);
-
-            // First vector is row
-            int Row();
-            // Second vector is column
-            int Column();
-
+            int row;
+            int column;
 
     public:
-       ComplexMatrix();
+            ComplexMatrix();
             ComplexMatrix(int r, int c);
             ComplexMatrix(std::vector<ComplexVector> k);
             ~ComplexMatrix();
@@ -37,6 +33,13 @@ namespace ComplexSpace
             ComplexMatrix Conjugate();
             ComplexMatrix Transpose();
             ComplexMatrix Adjoint();
+
+            bool operator==(ComplexMatrix A);
+
+            // First vector is row
+            int Row();
+            // Second vector is column
+            int Column();
     };
 }
 

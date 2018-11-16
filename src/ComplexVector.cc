@@ -11,12 +11,13 @@ ComplexVector::ComplexVector(int s)
 {
     for (int i = 0; i < s; i++)
     {
-        v.push_back(ComplexNumber());
+        v.push_back(ComplexNumber());   
     }
 }
 
 ComplexVector::ComplexVector()
 {
+    v = std::vector<ComplexNumber>();
 }
 
 ComplexVector::~ComplexVector()
