@@ -9,9 +9,9 @@ namespace ComplexSpace
     class ComplexVector 
     {
         private:
-            std::vector<ComplexNumber> v;
 
         public:
+            std::vector<ComplexNumber> v;
             ComplexVector(std::vector<ComplexNumber> k);
             ComplexVector(int s);
             ComplexVector();
