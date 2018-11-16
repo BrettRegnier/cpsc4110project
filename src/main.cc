@@ -11,7 +11,7 @@ int main()
 
     ComplexNumber c = a.Add(b);
 
-    std::cout << c.Real() << std::endl;
+    cout << c.ToString();
 }
 
 // Make a 

@@ -64,3 +64,11 @@ void ComplexNumber::Imaginary(float i)
 {
     imaginary = i;
 }
+
+std::string ComplexNumber::ToString()
+{
+    if (imaginary < 0)
+        return "c = " + std::to_string(real) + " - " + std::to_string(imaginary*-1) + "i";
+    else
+        return "c = " + std::to_string(real) + " + " + std::to_string(imaginary) + "i";
+}

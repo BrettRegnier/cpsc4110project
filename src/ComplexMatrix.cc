@@ -20,6 +20,7 @@ ComplexMatrix::ComplexMatrix(int r, int c)
 
 ComplexMatrix::ComplexMatrix(std::vector<ComplexVector> k)
 {
+    v = k;
 }
 
 ComplexMatrix::~ComplexMatrix()

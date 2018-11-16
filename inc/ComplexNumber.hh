@@ -30,6 +30,8 @@ namespace ComplexSpace
             void Imaginary(float i);
         
             bool operator==(ComplexNumber& i);
+
+            std::string ToString();
     };
 }
 
