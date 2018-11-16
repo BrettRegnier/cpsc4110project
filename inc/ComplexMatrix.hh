@@ -14,7 +14,7 @@ namespace ComplexSpace
             std::vector<ComplexVector> v;
 
             bool CheckDimension(ComplexMatrix A);
-            bool IsSquare(ComplexMatrix A);
+            bool IsSquare();
             int row;
             int column;
 
