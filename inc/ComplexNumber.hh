@@ -1,7 +1,7 @@
 #ifndef COMPLEXNUMBER_HH
 #define COMPLEXNUMBER_HH
 
-#include <string>
+#include <sstream>
 #include <cmath>
 
 namespace ComplexSpace
