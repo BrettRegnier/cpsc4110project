@@ -150,10 +150,10 @@ ComplexMatrix ComplexMatrix::Adjoint()
 
 int ComplexMatrix::Row()
 {
-    return row;
+    return v.size();
 }
 
 int ComplexMatrix::Column()
 {
-    return column;
+    return v[0].v.size();
 }
