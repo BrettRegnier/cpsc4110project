@@ -76,18 +76,29 @@ ComplexMatrix ComplexMatrix::Add(ComplexMatrix A)
 
     return ComplexMatrix(newMatrix);
 }
-
 ComplexMatrix ComplexMatrix::Multiplication(ComplexMatrix A)
 {
    vector<ComplexVector> newMatrix = vector<ComplexVector>();
-/*
-   if(v.Column() == A.v.Row())
+  
+   if(Column() == A.Row())
    {
-      
-      for(int i=0; i < v.size();i++)
+     
+      for(int i=0; i < Column();i++)
       {
-	 
-      }*/
+	 ComplexVector a;
+	 for(int k =0; k< Column();k++)
+	 {
+	    int size = v.size();
+	    ComplexNumber num = v[i].v[k + size];
+	    a.v.push_back(num);
+	 }
+	 for(int j=0; j<Column(); j++)
+	 {
+	    newMatrix[j].v[i]= A.v[j].DotProduct(a);
+	 }
+
+      }
+   }   
 }
 
 bool ComplexMatrix::IsHermitian()
