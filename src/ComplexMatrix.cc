@@ -51,3 +51,26 @@ ComplexMatrix ComplexMatrix::Multiplication(ComplexMatrix A)
 
 }
 
+ComplexMatrix ComplexMatrix::TensorProduct(ComplexMatrix A)
+{
+    int mRows = Row();
+    int mColumns = Column();
+
+    int nRows = A.Row();
+    int nColumns = A.Column();
+
+    int newRows = mRows * nRows;
+    int newColumns = mColumns * nColumns;
+
+    vector<ComplexVector> newMatrix = vector<ComplexVector>();
+
+    for(int y = 0; y < newRows; y++)
+    {
+        ComplexVector newVector = ComplexVector();
+        for(int x = 0; x < newColumns; x++)
+        {
+            newVector.v[x] = v[x/nRows].v[y/mRows].Product(A.v[y%nRows].v[x%mRows]);
+        }
+        newMatrix.push_back(newVector);
+    }
+}
