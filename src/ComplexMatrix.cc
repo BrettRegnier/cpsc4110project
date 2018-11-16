@@ -106,7 +106,6 @@ ComplexMatrix ComplexMatrix::Conjugate()
     return conj;
 }
 
-<<<<<<< HEAD
 ComplexMatrix ComplexMatrix::TensorProduct(ComplexMatrix A)
 {
     int mRows = Row();
@@ -130,7 +129,6 @@ ComplexMatrix ComplexMatrix::TensorProduct(ComplexMatrix A)
         newMatrix.push_back(newVector);
     }
 }
-=======
 ComplexMatrix ComplexMatrix::Transpose()
 {
     ComplexMatrix tran = ComplexMatrix(row, column);
@@ -159,4 +157,3 @@ int ComplexMatrix::Column()
 {
     return column;
 }
->>>>>>> 85dc6611a82dbc07191dcd34ae0e4f41405d9baf
