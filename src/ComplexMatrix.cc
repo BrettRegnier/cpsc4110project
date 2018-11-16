@@ -29,12 +29,12 @@ ComplexMatrix::~ComplexMatrix()
 
 bool ComplexMatrix::CheckDimension(ComplexMatrix A)
 {
-    return false;
+    return row == A.row && column == A.column;
 }
 
-bool ComplexMatrix::IsSquare(ComplexMatrix A)
+bool ComplexMatrix::IsSquare()
 {
-    return false;
+    return row == column;
 }
 
 bool ComplexMatrix::operator==(ComplexMatrix A)
