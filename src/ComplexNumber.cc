@@ -30,8 +30,8 @@ ComplexNumber ComplexNumber::Add(ComplexNumber x)
 ComplexNumber ComplexNumber::Product(ComplexNumber x)
 {
    ComplexNumber a;
-   a.real = x.real * real;
-   a.imaginary = x.imaginary * imaginary * -1;
+   a.real = (x.real * real) + (x.imaginary * imaginary * - 1);
+   a.imaginary = (x.imaginary * real) +(x.real * imaginary);
    return a;
 }
 
@@ -42,7 +42,12 @@ float ComplexNumber::Modulus()
 
 ComplexNumber ComplexNumber::Conjugate()
 {
-    imaginary *= -1;
+   ComplexNumber a;
+   int new_imaginary = imaginary * -1;
+   a.real = real;
+   a.imaginary = new_imaginary;
+   return a;
+   
 }
 
 float ComplexNumber::Real()
