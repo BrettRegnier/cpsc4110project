@@ -52,16 +52,12 @@ ComplexMatrix::~ComplexMatrix()
 //working
 bool ComplexMatrix::CheckDimension(ComplexMatrix A)
 {
-   //fixed
-   if(row == A.Row() && column == A.Column())
-      return true;
-   else
-    return false;
+    return row == A.row && column == A.column;
 }
 
-bool ComplexMatrix::IsSquare(ComplexMatrix A)
+bool ComplexMatrix::IsSquare()
 {
-    return false;
+    return row == column;
 }
 
 //working

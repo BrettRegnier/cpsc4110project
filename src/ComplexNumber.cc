@@ -42,12 +42,8 @@ float ComplexNumber::Modulus()
 
 ComplexNumber ComplexNumber::Conjugate()
 {
-   ComplexNumber a;
-   int new_imaginary = imaginary * -1;
-   a.real = real;
-   a.imaginary = new_imaginary;
-   return a;
-   
+    ComplexNumber a = ComplexNumber(real, imaginary*-1);
+    return a;
 }
 
 float ComplexNumber::Real()
