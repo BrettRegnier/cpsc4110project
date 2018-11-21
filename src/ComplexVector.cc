@@ -25,6 +25,11 @@ ComplexVector::~ComplexVector()
 {
 }
 
+ComplexNumber ComplexVector::operator[](int idx)
+{
+    // error checking?
+    return v[idx];
+}
 
 ComplexVector ComplexVector::Add(ComplexVector A)
 {

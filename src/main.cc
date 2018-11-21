@@ -1,8 +1,71 @@
 #include "ComplexMatrix.hh"
 #include <iostream>
+#include <stdlib.h> // rand
+#include <time.h>
 
 using namespace ComplexSpace;
 using namespace std;
+
+ComplexNumber CreateNumber()
+{
+    srand(time(NULL));
+    float real = float(rand() % 19  - 9);
+    float imaginary = float(rand() % 19 + -9);
+
+    return ComplexNumber(real, imaginary);
+}
+
+ComplexNumber CreateNumber(int r, int i)
+{
+    return ComplexNumber(r, i);
+}
+
+ComplexVector CreateVector(int elements)
+{
+    ComplexVector vec = ComplexVector();
+    for (int i = 0; i < elements; i++)
+    {
+        vec.Insert(CreateNumber());
+    }
+
+    return vec;
+}
+
+ComplexMatrix CreateMatrix(int r, int c, bool hermitian, bool unitary)
+{
+    ComplexMatrix mat = ComplexMatrix(r, c);
+    if (hermitian)
+    {
+        if (mat.IsSquare())
+        {
+
+        }
+        else
+        {
+            // error
+        }
+    }
+    else if (unitary)
+    {
+        if (mat.IsSquare())
+        {
+
+        }
+        else
+        {
+            // error
+        }
+    }
+    else
+    {
+        for (int i = 0; i < r; i++)
+        {
+            mat[i] = CreateVector(c);
+        }
+    }
+
+    return mat;
+}
 
 int main()
 {
@@ -126,4 +189,6 @@ int main()
     return 0;
     
 }
+
+
 

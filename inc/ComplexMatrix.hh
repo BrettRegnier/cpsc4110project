@@ -14,7 +14,6 @@ namespace ComplexSpace
             std::vector<ComplexVector> v;
 
             bool CheckDimension(ComplexMatrix A);
-            bool IsSquare();
 
     public:
             // std::vector<ComplexVector> v;
@@ -26,14 +25,22 @@ namespace ComplexSpace
             ComplexMatrix Add(ComplexMatrix A);
             ComplexMatrix Multiplication(ComplexMatrix A);
 
+            bool IsSquare();
             bool IsHermitian();
+            bool IsUnitary();
+            bool IsIdentity();
 
             ComplexMatrix TensorProduct(ComplexMatrix A);
             ComplexMatrix Conjugate();
             ComplexMatrix Transpose();
             ComplexMatrix Adjoint();
 
-            bool operator==(ComplexMatrix A);
+            float ExpectedValue(ComplexMatrix hermitian);
+
+            bool operator==(ComplexMatrix B);
+            ComplexMatrix operator+(ComplexMatrix B);
+            ComplexMatrix operator*(ComplexMatrix B);
+            ComplexVector operator[](int idx);
 
             // First vector is row
             int Row();

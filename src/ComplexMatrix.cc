@@ -29,6 +29,7 @@ ComplexMatrix::ComplexMatrix(std::vector<ComplexVector> k)
 ComplexMatrix::~ComplexMatrix()
 {
 }
+
 //working
 bool ComplexMatrix::CheckDimension(ComplexMatrix A)
 {
@@ -41,15 +42,15 @@ bool ComplexMatrix::IsSquare()
 }
 
 //working
-bool ComplexMatrix::operator==(ComplexMatrix A)
+bool ComplexMatrix::operator==(ComplexMatrix B)
 {
-    if (Row() == A.Row() && Column() == A.Column())
+    if (Row() == B.Row() && Column() == B.Column())
     {
         for (int i = 0; i < Row(); i++)
         {
             for (int j = 0; j < Column(); j++)
             {
-                if (!(v[i].v[j] == A.v[i].v[j]))
+                if (!(v[i].v[j] == B.v[i].v[j]))
                 {
                     return false;
                 }
@@ -60,6 +61,22 @@ bool ComplexMatrix::operator==(ComplexMatrix A)
     }
     
     return false;
+}
+
+ComplexMatrix ComplexMatrix::operator+(ComplexMatrix B)
+{
+    return Add(B);
+}
+
+ComplexMatrix ComplexMatrix::operator*(ComplexMatrix B)
+{
+    return Multiplication(B);
+}
+
+ComplexVector ComplexMatrix::operator[](int idx)
+{
+    // error checking?
+    return v[idx];
 }
 
 //working
@@ -134,6 +151,57 @@ bool ComplexMatrix::IsHermitian()
     }
 }
 
+bool ComplexMatrix::IsUnitary()
+{
+    if (IsSquare())
+    {
+        return (*this * Adjoint()).IsIdentity();
+    }
+    else
+    {
+        // error
+    }
+}
+
+bool ComplexMatrix::IsIdentity()
+{
+    if (IsSquare())
+    {
+        // Might need a check that the matrix is not a 0 by 0, 
+        // unless we have the checks in the constructor
+        // Could iterate through row or column since they are square.
+        for (int i = 0; i < Row(); i++)
+            if (v[i][i].Real() != 1)
+                return false;
+
+        return true;
+    }
+    else
+    {
+        // error
+    }
+}
+
+float ComplexMatrix::ExpectedValue(ComplexMatrix hermitian)
+{
+    if (hermitian.IsHermitian())
+    {
+        // Multiply the hermitian and the matrix together. 
+        ComplexMatrix result = Multiplication(hermitian);
+
+        // Calculate the dot product of this * this*hermitian
+        ComplexMatrix temp = Adjoint();
+
+        result = temp.Multiplication(result);
+
+        return result[0][0].Real();
+    }
+    else
+    {
+        // error
+    }
+}
+
 ComplexMatrix ComplexMatrix::Conjugate()
 {
     ComplexMatrix conj = ComplexMatrix(Row(), Column());
@@ -168,6 +236,7 @@ ComplexMatrix ComplexMatrix::TensorProduct(ComplexMatrix A)
         newMatrix.push_back(newVector);
     }
 }
+
 ComplexMatrix ComplexMatrix::Transpose()
 {
     ComplexMatrix tran = ComplexMatrix(Row(), Column());

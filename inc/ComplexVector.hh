@@ -23,6 +23,8 @@ namespace ComplexSpace
             void Insert(ComplexNumber i);
             int size();
 
+            ComplexNumber operator[](int idx);
+
             std::string ToString();
     };
 }
