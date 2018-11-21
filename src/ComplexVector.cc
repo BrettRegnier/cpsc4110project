@@ -90,3 +90,14 @@ int ComplexVector::size()
 {
     return v.size();
 }
+
+std::string ComplexVector::ToString()
+{
+    std::string msg = "| ";
+    for (int i = 0; i < size(); i++)
+    {
+        msg += v[i].ToString() + " | ";
+    }
+
+    return msg;
+}

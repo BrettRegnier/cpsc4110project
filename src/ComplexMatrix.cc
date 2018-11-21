@@ -7,42 +7,22 @@ using namespace std;
 //working
 ComplexMatrix::ComplexMatrix(int r, int c)
 {
-    row = r;
-    column = c;
-    // we need to decide how are we taking the input. either we are
-    // asking the user within this function to input the entire matrix
-    // or we pass in the vector<ComplexVector> in this constructor. 
-    ComplexNumber a = ComplexNumber(1,2);
-    ComplexVector b;
-    for(int i=0; i< 2; i++)
-       b.Insert(a);
-    ComplexVector b1= ComplexVector(b);
-     //Testing purpose start
-       
-       for(int j=0; j< 2; j++)
-       {
-	  v.push_back(b1);
-	  //v[j].v.push_back(a);
-       }
-       //Testing purpose ends
-       
-       // actual code that dint work :( 
-       /*
-	 for(int i = 0; i<r; i++)
-	 {
-	 v.push_back(ComplexVector());
+    v = std::vector<ComplexVector>();
+    for (int i = 0; i < r; i++)
+    {
+        v.push_back(ComplexVector());
         for (int j = 0; j < c; j++)
         {
-            v[j].v.push_back(ComplexNumber());
-	    }
-	    }
-       */
-    
+            v[i].v.push_back(ComplexNumber());
+        }
+    }
 }
 
 //working
 ComplexMatrix::ComplexMatrix(std::vector<ComplexVector> k)
 {
+    // Require error checking that the input doesn't have unaligned sizes of rows
+    // and columns
     v = k;
 }
 
@@ -52,31 +32,31 @@ ComplexMatrix::~ComplexMatrix()
 //working
 bool ComplexMatrix::CheckDimension(ComplexMatrix A)
 {
-    return row == A.row && column == A.column;
+    return Row() == A.Row() && Column() == A.Column();
 }
 
 bool ComplexMatrix::IsSquare()
 {
-    return row == column;
+    return Row() == Column();
 }
 
 //working
 bool ComplexMatrix::operator==(ComplexMatrix A)
 {
-    if (row == A.Row() && column == A.Column())
+    if (Row() == A.Row() && Column() == A.Column())
     {
-        for (int i = 0; i < row; i++)
+        for (int i = 0; i < Row(); i++)
         {
-            for (int j = 0; j < column; j++)
+            for (int j = 0; j < Column(); j++)
             {
-                if (v[i].v[j] == A.v[i].v[j])
+                if (!(v[i].v[j] == A.v[i].v[j]))
                 {
-                    return true;
+                    return false;
                 }
             }
         }
 
-        return false;
+        return true;
     }
     
     return false;
@@ -114,56 +94,49 @@ ComplexMatrix ComplexMatrix::Add(ComplexMatrix A)
 
 ComplexMatrix ComplexMatrix::Multiplication(ComplexMatrix A)
 {
-   vector<ComplexVector> newMatrix;
-  
-   if(Column() == A.Row())
-   {
-      ComplexVector store;
-       for(int i=0; i < Row();i++)
-      {
-      
-	 //cout <<"Row: " << Row() << " Column: " << Column() << endl;
-	 ComplexVector a;
-	 //ComplexVector store;
-	 for(int k =0; k< Row();k++)
-	 {
-	    
-	    ComplexNumber num = A.v[i].v[k];
-	    a.v.push_back(num);
-	    
- 	 }
-	 for(int i=0; i< 2; i++)
-	    cout<< a.v[i].Real() << " " << a.v[i].Imaginary() << endl;
-	 
+    ComplexMatrix tempMatrix = ComplexMatrix(Row(), A.Column());
+    // C * D where the Columns of C have to equal the rows of D
+    if (Column() == A.Row())
+    {
+        // Could be equal to Column() or A.Row()
+        int mults = Column();
 
-	 ComplexVector find= ComplexVector(a);
-	 for(int j=0; j< Column();j++)
-	 { ComplexNumber cnum= v[j].DotProduct(find);
-	   
-	    store.Insert(cnum);
-	 }
-	    for(int i=0; i<Column(); i++)
-	       cout<<store.v[i].Real() << " " << store.v[i].Imaginary() << "   " ;
-	    cout << endl;
-	 }
-	 
-      ComplexVector final = ComplexVector(store);
-      newMatrix.push_back(final);
+        // Loop through the new matrix's dimensions
+        for (int i = 0; i < tempMatrix.Row(); i++)
+        {
+            for (int j = 0; j < tempMatrix.Column(); j++)
+            {
+                for (int k = 0; k < mults; k++)
+                {
+                    ComplexNumber t = (v[i].v[k] * A.v[k].v[j]);
+                    tempMatrix.v[i].v[j] = tempMatrix.v[i].v[j] + t;
+                }
+            }
+        }
 
-      
-   }
-   ComplexMatrix temp = ComplexMatrix(newMatrix);
-   return temp;
+    }
+    else
+    {
+        // throw error
+    }
+    return tempMatrix;
 }
 
 bool ComplexMatrix::IsHermitian()
 {
-    return *this == Adjoint();
+    if (IsSquare())
+    {
+        return *this == Adjoint();
+    }
+    else
+    {
+        // error can't check if hermitian because not square
+    }
 }
 
 ComplexMatrix ComplexMatrix::Conjugate()
 {
-    ComplexMatrix conj = ComplexMatrix(row, column);
+    ComplexMatrix conj = ComplexMatrix(Row(), Column());
     for (int i = 0; i < Row(); i++)
     {
         conj.v.push_back(v[i].Conjugate());
@@ -197,7 +170,7 @@ ComplexMatrix ComplexMatrix::TensorProduct(ComplexMatrix A)
 }
 ComplexMatrix ComplexMatrix::Transpose()
 {
-    ComplexMatrix tran = ComplexMatrix(row, column);
+    ComplexMatrix tran = ComplexMatrix(Row(), Column());
     for (int i = 0; i < Row(); i++)
     {
         for (int j = 0; j < Column(); j++)
@@ -222,4 +195,16 @@ int ComplexMatrix::Row()
 int ComplexMatrix::Column()
 {
     return v[0].v.size();
+}
+
+std::string ComplexMatrix::ToString()
+{
+    std::string msg = "";
+
+    for (int i = 0; i < Row(); i++)
+    {
+        msg += v[i].ToString() + "\n";
+    }
+
+    return msg;
 }

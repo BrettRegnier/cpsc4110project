@@ -22,6 +22,8 @@ namespace ComplexSpace
             ComplexVector Conjugate();
             void Insert(ComplexNumber i);
             int size();
+
+            std::string ToString();
     };
 }
 

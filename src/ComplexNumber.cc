@@ -11,6 +11,17 @@ ComplexNumber::~ComplexNumber()
 {
 }
 
+ComplexNumber ComplexNumber::operator+(ComplexNumber& x)
+{
+    return Add(x);
+}
+
+ComplexNumber ComplexNumber::operator*(ComplexNumber& x)
+{
+    return Product(x);
+}
+
+
 bool ComplexNumber::operator==(ComplexNumber& i)
 {
     if (real == i.real && imaginary == i.imaginary)

@@ -29,6 +29,8 @@ namespace ComplexSpace
             void Real(float r);
             void Imaginary(float i);
         
+            ComplexNumber operator+(ComplexNumber& x);
+            ComplexNumber operator*(ComplexNumber& x);
             bool operator==(ComplexNumber& i);
 
             std::string ToString();

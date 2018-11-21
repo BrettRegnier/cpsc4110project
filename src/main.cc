@@ -7,70 +7,121 @@ using namespace std;
 int main()
 {
    // Testing Complex Number
+    // ComplexNumber a = ComplexNumber(1, 2);
+    // ComplexNumber b = ComplexNumber(2, 4);
+    // ComplexNumber b1 = ComplexNumber(4, 4);
+
+    // ComplexVector k;
+    // k.Insert(a);
+    // k.Insert(b);
+    // k.Insert(b1);
+    
+    // ComplexNumber c = a.Add(b);
+    // ComplexNumber d= a.Product(b);
+    // ComplexNumber e= a.Conjugate();
+
+    // cout <<"Addition "<< c.ToString()<<endl;
+    // cout <<"Product "<< d.ToString()<<endl;
+    // //cout<< "Conjugate " << e.ToString() <<endl;
+
+    // //Testing Complex Vector
+    // ComplexVector a1 = ComplexVector(k);
+    // ComplexVector a2 = ComplexVector(k);
+    // ComplexVector result_add = a1.Add(a2);
+    // ComplexNumber  result_product= a1.DotProduct(a2);
+    
+    // cout << "Complex Vector Addition"<<endl;
+    // cout << result_add.ToString() << endl;
+    // // for(int i = 0; i <3 ;i++)
+    // // {
+    // //    cout << result_add.v[i].Real() << " " << result_add.v[i].Imaginary()<< endl;
+    // // }
+
+    // cout <<"Complex Vector DotProduct" << endl;
+    // cout << result_product.Real() << " " << result_product.Imaginary() << endl;
+
+    // //Testing ComplexMatrix
+    
+    // ComplexMatrix x= ComplexMatrix(2,2);
+    // ComplexMatrix y= ComplexMatrix(2,2);
+    // ComplexMatrix z = x.Add(y);
+
+    // cout<< "Matrix Addition"<<endl;
+    // cout << z.ToString() << endl;
+    // // for(int i = 0; i<2; i++)
+    // // {
+    // //    for(int j=0; j<2; j++)
+    // //    {
+	// //   cout<< z.v[i].v[j].Real() <<" " << z.v[i].v[j].Imaginary()<< "    ";
+    // //    }
+    // //    cout<< endl;
+    // // }
+
+    // cout<< "Test for operator == "<<endl;
+    // if( x == y)
+    //    cout << "Equal"<<endl;
+    // else
+    //    cout<< "Not Equal"<<endl;
+
+    // cout<< "Test for Multiplication"<<endl;
+    // ComplexMatrix mult= z.Multiplication(x);
+    // cout << mult.ToString() << endl;
+    // for(int i=0; i<2; i++)
+    // {
+    //    for(int j=0; j<2 ; j++)
+    //    {
+	//   cout <<mult.v[i].v[j].Real() << " " <<mult.v[i].v[j].Imaginary() << "    ";
+    //    }
+    //    cout<< endl;
+    // }
+    
     ComplexNumber a = ComplexNumber(1, 2);
-    ComplexNumber b = ComplexNumber(2, 4);
-    ComplexNumber b1 = ComplexNumber(4, 4);
+    ComplexNumber b = ComplexNumber(2, 2);
 
-    ComplexVector k;
-    k.Insert(a);
-    k.Insert(b);
-    k.Insert(b1);
-    
     ComplexNumber c = a.Add(b);
-    ComplexNumber d= a.Product(b);
-    ComplexNumber e= a.Conjugate();
 
-    cout <<"Addition "<< c.ToString()<<endl;
-    cout <<"Product "<< d.ToString()<<endl;
-    //cout<< "Conjugate " << e.ToString() <<endl;
+    cout << c.ToString() << endl;
 
-    //Testing Complex Vector
-    ComplexVector a1 = ComplexVector(k);
-    ComplexVector a2 = ComplexVector(k);
-    ComplexVector result_add = a1.Add(a2);
-    ComplexNumber  result_product= a1.DotProduct(a2);
+    cout << a.Modulus() << endl;
+    cout << a.Conjugate().ToString() << endl;
+
+    ComplexVector x = ComplexVector(2);
+    x.v[0] = a;
+    x.v[1] = b;
+    ComplexVector y = ComplexVector(2);
+    y.v[0] = ComplexNumber(1,1);
+    y.v[1] = ComplexNumber(1,0);
     
-    cout << "Complex Vector Addition"<<endl;
-    for(int i = 0; i <3 ;i++)
-    {
-       cout << result_add.v[i].Real() << " " << result_add.v[i].Imaginary()<< endl;
-    }
+    std::vector<ComplexVector> j;
+    j.push_back(x);
+    j.push_back(y);
+    ComplexMatrix A = ComplexMatrix(j);
 
-    cout <<"Complex Vector DotProduct" << endl;
-    cout << result_product.Real() << " " << result_product.Imaginary() << endl;
+    ComplexVector p = ComplexVector(1);
+    p.v[0] = a;
+    ComplexVector o = ComplexVector(1);
+    o.v[0] = ComplexNumber(1,1);
+    std::vector<ComplexVector> k;
+    k.push_back(p);
+    k.push_back(o);
+    ComplexMatrix B = ComplexMatrix(k);
 
-    //Testing ComplexMatrix
+    cout << x.ToString() << endl << endl;
+
+    cout << "Matrix A" << endl;
+    cout << A.ToString() << endl << endl;
+    cout << "Matrix B" << endl;
+    cout << B.ToString() << endl << endl;
+
+
+    // ComplexMatrix C = ComplexMatrix(2, 3);
+    // cout << C.ToString() << endl << endl;
+
+    cout << "A rows = " << A.Row() << " columns = " << A.Column() << endl;
+    cout << "B rows = " << B.Row() << " columns = " << B.Column() << endl;
     
-    ComplexMatrix x= ComplexMatrix(2,2);
-    ComplexMatrix y= ComplexMatrix(2,2);
-    ComplexMatrix z = x.Add(y);
-
-    cout<< "Matrix Addition"<<endl;
-    for(int i = 0; i<2; i++)
-    {
-       for(int j=0; j<2; j++)
-       {
-	  cout<< z.v[i].v[j].Real() <<" " << z.v[i].v[j].Imaginary()<< "    ";
-       }
-       cout<< endl;
-    }
-
-    cout<< "Test for operator == "<<endl;
-    if( x == y)
-       cout << "Equal"<<endl;
-    else
-       cout<< "Not Equal"<<endl;
-
-    cout<< "Test for Multiplication"<<endl;
-    ComplexMatrix mult= z.Multiplication(x);
-    for(int i=0; i<2; i++)
-    {
-       for(int j=0; j<2 ; j++)
-       {
-	  cout <<mult.v[i].v[j].Real() << " " <<mult.v[i].v[j].Imaginary() << "    ";
-       }
-       cout<< endl;
-    }
+    cout << "A * B = " << endl;
+    cout << A.Multiplication(B).ToString(); 
 
     return 0;
     
