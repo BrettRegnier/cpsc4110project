@@ -142,11 +142,14 @@ int main()
     ComplexNumber b = ComplexNumber(2, 2);
 
     ComplexNumber c = a.Add(b);
+    cout << "ComplexNumber Addition" << endl;
+    cout << c.ToString() << endl<<endl;
+    
+    cout << "ComplexNumber Modulus"<< endl;
+    cout << a.Modulus() << endl<<endl;
 
-    cout << c.ToString() << endl;
-
-    cout << a.Modulus() << endl;
-    cout << a.Conjugate().ToString() << endl;
+    cout << "ComplexNumber Conjugate" << endl;
+    cout << a.Conjugate().ToString() << endl<<endl;
 
     ComplexVector x = ComplexVector(2);
     x.v[0] = a;
@@ -158,6 +161,18 @@ int main()
     std::vector<ComplexVector> j;
     j.push_back(x);
     j.push_back(y);
+
+    cout <<"ComplexVector Addition " << endl;
+    ComplexVector result = y.Add(x);
+    cout<< result.ToString() << endl<<endl;
+
+    cout<< "ComplexVector DotProduct" << endl;
+    ComplexNumber result_mult = y.DotProduct(x);
+    cout << result_mult.ToString() << endl << endl;
+
+    cout << "Add Vector ComplexVector Conjugate" << endl;
+    cout << result.Conjugate().ToString()<<endl;
+       
     ComplexMatrix A = ComplexMatrix(j);
 
     ComplexVector p = ComplexVector(1);
@@ -167,8 +182,9 @@ int main()
     std::vector<ComplexVector> k;
     k.push_back(p);
     k.push_back(o);
+    
     ComplexMatrix B = ComplexMatrix(k);
-
+    cout<< "Complex Vecor " << endl;
     cout << x.ToString() << endl << endl;
 
     cout << "Matrix A" << endl;
@@ -182,10 +198,27 @@ int main()
 
     cout << "A rows = " << A.Row() << " columns = " << A.Column() << endl;
     cout << "B rows = " << B.Row() << " columns = " << B.Column() << endl;
-    
-    cout << "A * B = " << endl;
-    cout << A.Multiplication(B).ToString(); 
 
+    cout << "A + A = " << endl;
+    cout << A.Add(A).ToString()<<endl;
+    cout << "A * B = " << endl;
+    cout << A.Multiplication(B).ToString()<<endl;
+
+    
+    cout << "A Transpose " <<endl;
+    cout << A.Transpose().ToString()<< endl;
+
+    cout << "A Conjugate()" <<endl;
+    cout << A.Conjugate().ToString() <<endl;
+
+    cout <<"A Adjoint" << endl;
+    cout << A.Adjoint().ToString() << endl;
+
+    cout <<"Scalar Mult" <<endl;
+    cout <<A.Scalar_Mult(c).ToString()<<endl;
+    
+    cout << "A Tensor Product B" << endl;
+    cout << B.TensorProduct(A).ToString() <<endl;
     return 0;
     
 }

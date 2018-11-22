@@ -19,7 +19,8 @@ namespace ComplexSpace
             // std::vector<ComplexVector> v;
             ComplexMatrix();
             ComplexMatrix(int r, int c);
-            ComplexMatrix(std::vector<ComplexVector> k);
+       ComplexMatrix(std::vector<ComplexVector> k);
+       
             ~ComplexMatrix();
 
             ComplexMatrix Add(ComplexMatrix A);
@@ -34,7 +35,8 @@ namespace ComplexSpace
             ComplexMatrix Conjugate();
             ComplexMatrix Transpose();
             ComplexMatrix Adjoint();
-
+            ComplexVector Scalar_Mult(ComplexNumber a);
+       
             float ExpectedValue(ComplexMatrix hermitian);
 
             bool operator==(ComplexMatrix B);

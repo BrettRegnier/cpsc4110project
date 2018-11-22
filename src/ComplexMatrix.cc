@@ -33,7 +33,7 @@ ComplexMatrix::~ComplexMatrix()
 //working
 bool ComplexMatrix::CheckDimension(ComplexMatrix A)
 {
-    return Row() == A.Row() && Column() == A.Column();
+   return Row() == A.Row() && Column() == A.Column();
 }
 
 bool ComplexMatrix::IsSquare()
@@ -205,9 +205,10 @@ float ComplexMatrix::ExpectedValue(ComplexMatrix hermitian)
 ComplexMatrix ComplexMatrix::Conjugate()
 {
     ComplexMatrix conj = ComplexMatrix(Row(), Column());
-    for (int i = 0; i < Row(); i++)
+    for (int i = 0; i < Column(); i++)
     {
-        conj.v.push_back(v[i].Conjugate());
+       //conj.v.push_back(v[i].Conjugate());
+       conj.v[i]= v[i].Conjugate();
     }
 
     return conj;
@@ -215,26 +216,60 @@ ComplexMatrix ComplexMatrix::Conjugate()
 
 ComplexMatrix ComplexMatrix::TensorProduct(ComplexMatrix A)
 {
-    int mRows = Row();
+   /* int mRows = Row();
     int mColumns = Column();
 
     int nRows = A.Row();
     int nColumns = A.Column();
 
     int newRows = mRows * nRows;
-    int newColumns = mColumns * nColumns;
+    int newColumns = mColumns * nColumns;*/
 
-    vector<ComplexVector> newMatrix = vector<ComplexVector>();
-
+   
+    vector<ComplexVector>newMatrix;
+   
+    for(int y = 0; y< Row(); y++)
+    {
+       ComplexVector temp= ComplexVector();
+       for(int x=0; x< Column();x++)
+       {
+	  temp = this->Scalar_Mult(A.v[y].v[x]);
+	  cout<< temp.ToString()<<endl;
+       }
+       
+       newMatrix.push_back(temp);
+     
+    }
+    ComplexMatrix result= ComplexMatrix(newMatrix);
+    
+/*					    
+    vector<ComplexVector> newMatrix;
     for(int y = 0; y < newRows; y++)
     {
         ComplexVector newVector = ComplexVector();
         for(int x = 0; x < newColumns; x++)
         {
-            newVector.v[x] = v[x/nRows].v[y/mRows].Product(A.v[y%nRows].v[x%mRows]);
+	   //newVector.v[x] = v[x/nRows].v[y/mRows].Product(A.v[y%nRows].v[x%mRows]);
+	   //newVector.v[x] = v[x].v[.Scalar_Mult(A.v[x].v[y]);
         }
         newMatrix.push_back(newVector);
     }
+*/					    
+    return result;
+}
+ComplexVector ComplexMatrix::Scalar_Mult (ComplexNumber a)
+{
+   //ComplexMatrix temp= ComplexMatrix(Row(), Column());
+   ComplexVector temp= ComplexVector();
+   for (int i = 0; i<Row();i++)
+   {
+      for(int j=0; j<Column(); j++)
+      {
+	 //temp.v[i].v[j]= a.Product(v[i].v[j]);
+	 temp.v.push_back(a.Product(v[i].v[j]));
+      }
+   }
+   return temp;
 }
 
 ComplexMatrix ComplexMatrix::Transpose()

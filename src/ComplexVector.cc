@@ -81,7 +81,8 @@ ComplexVector ComplexVector::Conjugate()
     ComplexVector temp = ComplexVector();
     for (int i = 0; i < v.size(); i++)
     {
-        temp.v[i] = v[i].Conjugate();
+       temp.v.push_back(v[i].Conjugate());
+       //temp.v[i] = v[i].Conjugate();
     }
     return temp;
 }
