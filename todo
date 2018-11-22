@@ -7,3 +7,5 @@
 2. Usage of scalars that complex matrices and complex vectors have. 
     We can probably leave the scalar out of vector since we almost never
     use it.
+
+3. Error checking and response
