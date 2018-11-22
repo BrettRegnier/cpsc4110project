@@ -42,7 +42,7 @@ namespace ComplexSpace
             bool operator==(ComplexMatrix B);
             ComplexMatrix operator+(ComplexMatrix B);
             ComplexMatrix operator*(ComplexMatrix B);
-            ComplexVector operator[](int idx);
+            ComplexVector& operator[](int idx);
 
             // First vector is row
             int Row();

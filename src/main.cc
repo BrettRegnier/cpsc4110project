@@ -8,7 +8,6 @@ using namespace std;
 
 ComplexNumber CreateNumber()
 {
-    srand(time(NULL));
     float real = float(rand() % 19  - 9);
     float imaginary = float(rand() % 19 + -9);
 
@@ -22,16 +21,16 @@ ComplexNumber CreateNumber(int r, int i)
 
 ComplexVector CreateVector(int elements)
 {
-    ComplexVector vec = ComplexVector();
+    ComplexVector vec = ComplexVector(elements);
     for (int i = 0; i < elements; i++)
     {
-        vec.Insert(CreateNumber());
+        vec[i] = CreateNumber();
     }
 
     return vec;
 }
 
-ComplexMatrix CreateMatrix(int r, int c, bool hermitian, bool unitary)
+ComplexMatrix CreateMatrix(int r, int c, bool hermitian = false, bool unitary = false)
 {
     ComplexMatrix mat = ComplexMatrix(r, c);
     if (hermitian)
@@ -69,6 +68,8 @@ ComplexMatrix CreateMatrix(int r, int c, bool hermitian, bool unitary)
 
 int main()
 {
+    // needed for random number seed.
+    srand(time(NULL)); 
    // Testing Complex Number
     // ComplexNumber a = ComplexNumber(1, 2);
     // ComplexNumber b = ComplexNumber(2, 4);
@@ -218,7 +219,23 @@ int main()
     cout <<A.Scalar_Mult(c).ToString()<<endl;
     
     cout << "A Tensor Product B" << endl;
-    cout << B.TensorProduct(A).ToString() <<endl;
+    cout << A.TensorProduct(B).ToString() <<endl;
+
+    cout << "generated number " << CreateNumber().ToString() << endl;
+    cout << "generated vector " << CreateVector(2).ToString() << endl;
+    cout << "generated matrix " << endl << CreateMatrix(2,2).ToString() << endl;
+
+    ComplexMatrix tenA = ComplexMatrix(2,1);
+    tenA[0][0] = CreateNumber(1, 0);
+    tenA[1][0] = CreateNumber(-1, 2);
+    ComplexMatrix tenB = ComplexMatrix(1,2);
+    tenB[0][0] = CreateNumber(3, 1);
+    tenB[0][1] = CreateNumber(3, 0);
+    cout << tenA.ToString() << endl;
+    cout << tenB.ToString() << endl;
+
+    cout << "tenA Tensor Product tenB" << endl;
+    cout << tenA.TensorProduct(tenB).ToString() << endl;
     return 0;
     
 }

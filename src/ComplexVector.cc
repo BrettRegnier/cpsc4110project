@@ -25,7 +25,7 @@ ComplexVector::~ComplexVector()
 {
 }
 
-ComplexNumber ComplexVector::operator[](int idx)
+ComplexNumber& ComplexVector::operator[](int idx)
 {
     // error checking?
     return v[idx];
@@ -34,38 +34,32 @@ ComplexNumber ComplexVector::operator[](int idx)
 ComplexVector ComplexVector::Add(ComplexVector A)
 {
     ComplexVector temp = ComplexVector();
-  
-   if (size() == A.size())
-   {
-      for(int i=0; i< A.size(); i++)
-      {
-	 temp.Insert( A.v[i].Add(v[i]));
-      }           
-   }
-   else
-   {
-      //error
-   }
-   
-   return temp;
+
+    if (size() == A.size())
+    {
+        for(int i=0; i< A.size(); i++)
+        {
+            temp.Insert( A.v[i].Add(v[i]));
+        }
+    }
+    else
+    {
+        //error
+    }
+
+    return temp;
 }
 
 ComplexNumber ComplexVector::DotProduct(ComplexVector A)
 {
     ComplexVector temp = ComplexVector();
-    ComplexNumber num = ComplexNumber(0,0);
+    ComplexNumber num = ComplexNumber();
     if (size() == A.size())
-    {
-       
-        for (int i = 0; i < v.size(); i++)
+    {       
+        for (int i = 0; i < size(); i++)
         {
-	   ComplexNumber a=  v[i].Conjugate();
-	   ComplexNumber b= a.Product(A.v[i]);
-	   num = num.Add(b);
-	   
-	   //Previous code was only this
-           //temp.Insert(A.v[i].Product(v[i]));
-           // num = num.Add(temp.v[i]);
+            temp.Insert(A[i].Conjugate() * (*this)[i]);
+            num = num + temp[i];
         }
     }
     else
