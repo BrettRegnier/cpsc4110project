@@ -4,5 +4,6 @@
     3. Complex Matrix
     4. Quit
 
-2. Parser, expect a two value string of x,y
-    where x = real and y = imaginary.
+2. Usage of scalars that complex matrices and complex vectors have. 
+    We can probably leave the scalar out of vector since we almost never
+    use it.

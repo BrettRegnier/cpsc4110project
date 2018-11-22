@@ -16,6 +16,7 @@ ComplexMatrix::ComplexMatrix(int r, int c)
             v[i].v.push_back(ComplexNumber());
         }
     }
+    scalar = ComplexNumber(1, 0);
 }
 
 //working
@@ -24,6 +25,7 @@ ComplexMatrix::ComplexMatrix(std::vector<ComplexVector> k)
     // Require error checking that the input doesn't have unaligned sizes of rows
     // and columns
     v = k;
+    scalar = ComplexNumber(1, 0);
 }
 
 ComplexMatrix::~ComplexMatrix()
@@ -113,6 +115,7 @@ ComplexMatrix ComplexMatrix::Multiplication(ComplexMatrix A)
 {
     ComplexMatrix tempMatrix = ComplexMatrix(Row(), A.Column());
     // C * D where the Columns of C have to equal the rows of D
+
     if (Column() == A.Row())
     {
         // Could be equal to Column() or A.Row()

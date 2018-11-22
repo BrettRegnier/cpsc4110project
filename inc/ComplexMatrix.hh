@@ -12,6 +12,7 @@ namespace ComplexSpace
             /* Variables */
             // v[row][column]
             std::vector<ComplexVector> v;
+            ComplexNumber scalar;
 
             bool CheckDimension(ComplexMatrix A);
 
@@ -19,7 +20,7 @@ namespace ComplexSpace
             // std::vector<ComplexVector> v;
             ComplexMatrix();
             ComplexMatrix(int r, int c);
-       ComplexMatrix(std::vector<ComplexVector> k);
+            ComplexMatrix(std::vector<ComplexVector> k);
        
             ~ComplexMatrix();
 

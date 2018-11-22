@@ -66,8 +66,48 @@ ComplexMatrix CreateMatrix(int r, int c, bool hermitian = false, bool unitary = 
     return mat;
 }
 
+ComplexMatrix CNOT(ComplexMatrix qubits)
+{
+    if (qubits.Row() == 4 && qubits.Column() == 1)
+    {
+        ComplexMatrix cnot = ComplexMatrix(4, 4);
+        cnot[0][0] = ComplexNumber(1);
+        cnot[1][1] = ComplexNumber(1);
+        cnot[2][3] = ComplexNumber(1);
+        cnot[3][2] = ComplexNumber(1);
+        return cnot * qubits;
+    }
+    else
+    {
+        // error
+    }
+}
+
+ComplexMatrix Toffoli(ComplexMatrix qubits)
+{
+    if (qubits.Row() == 8 && qubits.Column() == 1)
+    {
+        ComplexMatrix toffoli = ComplexMatrix(8, 8);
+        toffoli[0][0] = ComplexNumber(1);
+        toffoli[1][1] = ComplexNumber(1);
+        toffoli[2][2] = ComplexNumber(1);
+        toffoli[3][3] = ComplexNumber(1);
+        toffoli[4][4] = ComplexNumber(1);
+        toffoli[5][5] = ComplexNumber(1);
+        toffoli[6][7] = ComplexNumber(1);
+        toffoli[7][6] = ComplexNumber(1);
+
+        return toffoli * qubits;
+    }
+    else
+    {
+        // error
+    }
+}
+
 int main()
 {
+
     // needed for random number seed.
     srand(time(NULL)); 
    // Testing Complex Number
@@ -236,6 +276,50 @@ int main()
 
     cout << "tenA Tensor Product tenB" << endl;
     cout << tenA.TensorProduct(tenB).ToString() << endl;
+
+    ComplexMatrix basis00 = ComplexMatrix(4, 1);
+    basis00[0][0] = ComplexNumber(1, 0);
+    cout << "2 Qubit matrix in super position |00>" << endl;
+    cout << basis00.ToString() << endl;
+    cout << "CNOT of |00>" << endl;
+    cout << CNOT(basis00).ToString() << endl;
+
+    ComplexMatrix basis01 = ComplexMatrix(4, 1);
+    basis01[1][0] = ComplexNumber(1, 0);
+    cout << "2 Qubit matrix in super position |01>" << endl;
+    cout << basis01.ToString() << endl;
+    cout << "CNOT of |01>" << endl;
+    cout << CNOT(basis01).ToString() << endl;
+
+    ComplexMatrix basis10 = ComplexMatrix(4, 1);
+    basis10[2][0] = ComplexNumber(1, 0);
+    cout << "2 Qubit matrix in super position |10>" << endl;
+    cout << basis10.ToString() << endl;
+    cout << "CNOT of |10>" << endl;
+    cout << CNOT(basis10).ToString() << endl;
+
+    ComplexMatrix basis11 = ComplexMatrix(4, 1);
+    basis11[3][0] = ComplexNumber(1, 0);
+    cout << "2 Qubit matrix in super position |11>" << endl;
+    cout << basis11.ToString() << endl;
+    cout << "CNOT of |11>" << endl;
+    cout << CNOT(basis11).ToString() << endl;
+
+    ComplexMatrix basis110 = ComplexMatrix(8, 1);
+    basis110[6][0] = ComplexNumber(1, 0);
+    cout << "3 Qubit matrix in super position |110>" << endl;
+    cout << basis110.ToString() << endl;
+    cout << "toffoli of |110>" << endl;
+    cout << Toffoli(basis110).ToString() << endl;
+
+    ComplexMatrix basis111 = ComplexMatrix(8, 1);
+    basis111[7][0] = ComplexNumber(1, 0);
+    cout << "3 Qubit matrix in super position |111>" << endl;
+    cout << basis111.ToString() << endl;
+    cout << "toffoli of |111>" << endl;
+    cout << Toffoli(basis111).ToString() << endl;
+
+
     return 0;
     
 }
