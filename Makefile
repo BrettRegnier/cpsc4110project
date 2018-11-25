@@ -23,7 +23,6 @@ $(BIN_DIR)/%.o: $(SRC_DIR)/%.cc
 
 clean: 
 	rm $(BIN_DIR)/*.o $(BIN_DIR)/$(EXE) -f
-
 move:
 	mv $(EXE) $(BIN_DIR)
 

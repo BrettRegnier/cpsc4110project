@@ -16,6 +16,7 @@ ComplexMatrix::ComplexMatrix(int r, int c)
             v[i].v.push_back(ComplexNumber());
         }
     }
+    
     scalar = ComplexNumber(1, 0);
 }
 
@@ -26,6 +27,9 @@ ComplexMatrix::ComplexMatrix(std::vector<ComplexVector> k)
     // and columns
     v = k;
     scalar = ComplexNumber(1, 0);
+}
+ComplexMatrix::ComplexMatrix()
+{
 }
 
 ComplexMatrix::~ComplexMatrix()

@@ -1,4 +1,5 @@
 #include "ComplexMatrix.hh"
+#include "Interface.hh"
 #include <iostream>
 #include <stdlib.h> // rand
 #include <time.h>
@@ -65,7 +66,9 @@ ComplexMatrix CreateMatrix(int r, int c, bool hermitian = false, bool unitary = 
 
     return mat;
 }
-
+/*
+  Shah ; I had to remove it to the Interface class since it was used
+  by the functions there/ 
 ComplexMatrix CNOT(ComplexMatrix qubits)
 {
     if (qubits.Row() == 4 && qubits.Column() == 1)
@@ -104,81 +107,44 @@ ComplexMatrix Toffoli(ComplexMatrix qubits)
         // error
     }
 }
-
+*/
 int main()
 {
+   Interface a=Interface();
+
+   cout <<"QUAUNTUM PROJECT" << endl<< endl;
+   a.main_option() ;
+
+   switch(a.get_option())
+   {
+      case 1:
+      {
+	 ComplexMatrix result = ComplexMatrix(4,1);
+	 result = a.ControlNOT_function();
+	 cout<< result.ToString();
+	 break;
+      }
+      case 2:
+      {
+	 ComplexMatrix result2 = ComplexMatrix (8,1);
+	 result2 = a.Toffoli_function();
+	 cout<< result2.ToString();
+	 
+	 break;
+      }
+      case 3:
+      {
+	 break;
+      }
+      default:
+	 break;
+   }
+   return 0;
+   
 
     // needed for random number seed.
-    srand(time(NULL)); 
-   // Testing Complex Number
-    // ComplexNumber a = ComplexNumber(1, 2);
-    // ComplexNumber b = ComplexNumber(2, 4);
-    // ComplexNumber b1 = ComplexNumber(4, 4);
-
-    // ComplexVector k;
-    // k.Insert(a);
-    // k.Insert(b);
-    // k.Insert(b1);
-    
-    // ComplexNumber c = a.Add(b);
-    // ComplexNumber d= a.Product(b);
-    // ComplexNumber e= a.Conjugate();
-
-    // cout <<"Addition "<< c.ToString()<<endl;
-    // cout <<"Product "<< d.ToString()<<endl;
-    // //cout<< "Conjugate " << e.ToString() <<endl;
-
-    // //Testing Complex Vector
-    // ComplexVector a1 = ComplexVector(k);
-    // ComplexVector a2 = ComplexVector(k);
-    // ComplexVector result_add = a1.Add(a2);
-    // ComplexNumber  result_product= a1.DotProduct(a2);
-    
-    // cout << "Complex Vector Addition"<<endl;
-    // cout << result_add.ToString() << endl;
-    // // for(int i = 0; i <3 ;i++)
-    // // {
-    // //    cout << result_add.v[i].Real() << " " << result_add.v[i].Imaginary()<< endl;
-    // // }
-
-    // cout <<"Complex Vector DotProduct" << endl;
-    // cout << result_product.Real() << " " << result_product.Imaginary() << endl;
-
-    // //Testing ComplexMatrix
-    
-    // ComplexMatrix x= ComplexMatrix(2,2);
-    // ComplexMatrix y= ComplexMatrix(2,2);
-    // ComplexMatrix z = x.Add(y);
-
-    // cout<< "Matrix Addition"<<endl;
-    // cout << z.ToString() << endl;
-    // // for(int i = 0; i<2; i++)
-    // // {
-    // //    for(int j=0; j<2; j++)
-    // //    {
-	// //   cout<< z.v[i].v[j].Real() <<" " << z.v[i].v[j].Imaginary()<< "    ";
-    // //    }
-    // //    cout<< endl;
-    // // }
-
-    // cout<< "Test for operator == "<<endl;
-    // if( x == y)
-    //    cout << "Equal"<<endl;
-    // else
-    //    cout<< "Not Equal"<<endl;
-
-    // cout<< "Test for Multiplication"<<endl;
-    // ComplexMatrix mult= z.Multiplication(x);
-    // cout << mult.ToString() << endl;
-    // for(int i=0; i<2; i++)
-    // {
-    //    for(int j=0; j<2 ; j++)
-    //    {
-	//   cout <<mult.v[i].v[j].Real() << " " <<mult.v[i].v[j].Imaginary() << "    ";
-    //    }
-    //    cout<< endl;
-    // }
-    
+/*    srand(time(NULL)); 
+       
     ComplexNumber a = ComplexNumber(1, 2);
     ComplexNumber b = ComplexNumber(2, 2);
 
@@ -268,6 +234,7 @@ int main()
     ComplexMatrix tenA = ComplexMatrix(2,1);
     tenA[0][0] = CreateNumber(1, 0);
     tenA[1][0] = CreateNumber(-1, 2);
+
     ComplexMatrix tenB = ComplexMatrix(1,2);
     tenB[0][0] = CreateNumber(3, 1);
     tenB[0][1] = CreateNumber(3, 0);
@@ -318,10 +285,11 @@ int main()
     cout << basis111.ToString() << endl;
     cout << "toffoli of |111>" << endl;
     cout << Toffoli(basis111).ToString() << endl;
-
-
-    return 0;
     
+  
+    
+    return 0;
+*/  
 }
 
 
