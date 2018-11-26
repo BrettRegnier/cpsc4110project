@@ -68,7 +68,7 @@ ComplexMatrix Interface::Toffoli(ComplexMatrix qubits)
     // error
    }
 }
-ComplexMatrix Interface:: UF( ComplexMatrix qubits)
+ComplexMatrix Interface::UF( ComplexMatrix qubits)
 {
    ComplexMatrix UF= ComplexMatrix(4,4);
    UF[0][1]= ComplexNumber(1);

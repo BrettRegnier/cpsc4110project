@@ -26,6 +26,9 @@ namespace ComplexSpace
       ComplexMatrix Toffoli_function();
       ComplexMatrix CNOT(ComplexMatrix qubits);
       ComplexMatrix Toffoli(ComplexMatrix qubits);
+      ComplexMatrix UF(ComplexMatrix qubits);
+      ComplexMatrix UF_function();
+      
       //ComplexMatrix parsing(string input);
       void draw();
       

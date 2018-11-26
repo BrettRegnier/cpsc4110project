@@ -27,6 +27,7 @@ namespace ComplexSpace
             ComplexMatrix Add(ComplexMatrix A);
             ComplexMatrix Multiplication(ComplexMatrix A);
 
+       
             bool IsSquare();
             bool IsHermitian();
             bool IsUnitary();
