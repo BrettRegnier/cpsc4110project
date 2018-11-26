@@ -112,33 +112,36 @@ int main()
 {
    Interface a=Interface();
 
-   cout <<"QUAUNTUM PROJECT" << endl<< endl;
-   a.main_option() ;
-
-   switch(a.get_option())
+   cout <<"QUAUNTUM PROJECT" << endl << endl;
+   //a.main_option() ;
+   while(a.main_option())
    {
-      case 1:
+      switch(a.get_option())
       {
-	 ComplexMatrix result = ComplexMatrix(4,1);
-	 result = a.ControlNOT_function();
-	 cout<< result.ToString();
-	 break;
+	 case 1:
+	 {
+	    ComplexMatrix result = ComplexMatrix(4,1);
+	    result = a.ControlNOT_function();
+	    cout<< result.ToString();
+	    break;
+	 }
+	 case 2:
+	 {
+	    ComplexMatrix result2 = ComplexMatrix (8,1);
+	    result2 = a.Toffoli_function();
+	    cout<< result2.ToString();
+	    
+	    break;
+	 }
+	 case 3:
+	 {  // Deutsch's algorithm function
+	    break;
+	 }
+	 default:
+	    break;
       }
-      case 2:
-      {
-	 ComplexMatrix result2 = ComplexMatrix (8,1);
-	 result2 = a.Toffoli_function();
-	 cout<< result2.ToString();
-	 
-	 break;
-      }
-      case 3:
-      {
-	 break;
-      }
-      default:
-	 break;
    }
+   
    return 0;
    
 

@@ -16,6 +16,7 @@ Interface::~Interface()
 
 int Interface:: main_option()
 {
+   cout<< endl;
    cout << "Select an Option" << endl;
    cout << "1. Controlled-NOT " << endl;
    cout << "2. Toffoli Gate " << endl;
@@ -84,13 +85,25 @@ ComplexMatrix Interface:: ControlNOT_function()
    ComplexMatrix target_bit = ComplexMatrix(2,1);
    int input1;
    int input2;
+
+  control:
    cout << "Input the control bit" << endl;
    cin>> input1;
+   if(input1 != 0 && input1 !=1)
+   {
+      cout<< "Please insert either 1 or 0" << endl<<endl;
+      goto control;
+   }
    control_bit = qubit_input(control_bit, input1);
    
-   
+  target:
    cout << "Input the target bit" <<endl;
    cin>>input2;
+   if(input2 != 0 && input2 != 1)
+   {
+      cout << "Please insert either 1 or 0" << endl << endl;
+      goto target;
+   }
    target_bit = qubit_input(target_bit, input2);
    
    ComplexMatrix tensor = ComplexMatrix(4,1);
@@ -113,17 +126,35 @@ ComplexMatrix Interface:: Toffoli_function()
    int input1;
    int input2;
    int input3;
-   
+
+  control1:
    cout << "Input the first control bit" << endl;
    cin>> input1;
+   if(input1 !=0 & input1 != 1)
+   {
+      cout << "Please insert either 1 or 0" << endl << endl;
+      goto control1;
+   }
    control_bit1 = qubit_input(control_bit1, input1);
 
+  control2:
    cout << "Input the second control bit"<<endl;
    cin>>input2;
+   if(input2 !=0 & input2 !=1)
+   {
+      cout << "Please insert either 1 or 0" << endl << endl;
+      goto control2;
+   }
    control_bit2 = qubit_input(control_bit2, input2);
 
+  target:
    cout << "Input the target bit" <<endl;
    cin>>input3;
+   if(input3 != 0 & input3 !=1)
+   {
+      cout << "Please insert either 1 or 0" <<endl << endl;
+      goto target;
+   }
    target_bit = qubit_input(target_bit, input3);
 
    ComplexMatrix tensor1 = ComplexMatrix(4,1);
