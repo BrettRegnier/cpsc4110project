@@ -33,51 +33,36 @@ int Interface:: get_option()
 
 ComplexMatrix Interface::CNOT(ComplexMatrix qubits)
 {
-   if (qubits.Row() == 4 && qubits.Column() == 1)
-   {
-      ComplexMatrix cnot = ComplexMatrix(4, 4);
-      cnot[0][0] = ComplexNumber(1);
-      cnot[1][1] = ComplexNumber(1);
-      cnot[2][3] = ComplexNumber(1);
-      cnot[3][2] = ComplexNumber(1);
-      return cnot * qubits;
-   }
-   else
-   {
-     // error
-   }
+	if (qubits.Row() == 4 && qubits.Column() == 1)
+	{
+    	return ComplexMatrix::CNOT() * qubits;
+	}
+	else
+	{
+		// error
+	}
 }
 ComplexMatrix Interface::Toffoli(ComplexMatrix qubits)
 {
-   if (qubits.Row() == 8 && qubits.Column() == 1)
-   {
-      ComplexMatrix toffoli = ComplexMatrix(8, 8);
-      toffoli[0][0] = ComplexNumber(1);
-      toffoli[1][1] = ComplexNumber(1);
-      toffoli[2][2] = ComplexNumber(1);
-      toffoli[3][3] = ComplexNumber(1);
-      toffoli[4][4] = ComplexNumber(1);
-      toffoli[5][5] = ComplexNumber(1);
-      toffoli[6][7] = ComplexNumber(1);
-      toffoli[7][6] = ComplexNumber(1);
-      
-      return toffoli * qubits;
-   }
-   else
-   {
-    // error
-   }
+	if (qubits.Row() == 8 && qubits.Column() == 1)
+	{
+     	return ComplexMatrix::Toffoli() * qubits;
+	}
+	else
+	{
+		// error
+	}
 }
 ComplexMatrix Interface:: UF( ComplexMatrix qubits)
 {
-   ComplexMatrix UF= ComplexMatrix(4,4);
-   UF[0][1]= ComplexNumber(1);
-   UF[1][0]= ComplexNumber(1);
-   UF[2][2] = ComplexNumber(1);
-   UF[3][3] = ComplexNumber(1);
-
-   return UF * qubits;
-   
+	if (qubits.Row() == 4 && qubits.Column() == 1)
+	{
+		return ComplexMatrix::UF() * qubits; 
+	}
+	else
+	{
+		// error
+	}
 }
 
 
@@ -179,7 +164,7 @@ ComplexMatrix Interface:: Toffoli_function()
    result= Toffoli(tensor2);
    cout<<endl;
    cout<<"TOFFOLI OPERATION" <<endl;
-   cout<< "|" <<input1 << " > XOR " << "( |" << input2 << " > AND |" <<input3<< " >" <<endl;
+   cout<< "|" <<input1 << " > XOR " << "( |" << input2 << " > AND |" <<input3<< " > )" <<endl;
    return result;
  
 }

@@ -45,13 +45,22 @@ namespace ComplexSpace
             ComplexMatrix operator+(ComplexMatrix B);
             ComplexMatrix operator*(ComplexMatrix B);
             ComplexVector& operator[](int idx);
+			
+			ComplexNumber Scalar() { return scalar; }
+			void Scalar(ComplexNumber i) { scalar = i; }
 
             // First vector is row
             int Row();
             // Second vector is column
             int Column();
 
+			// Returns a graphical version of the matrix in string form.
             std::string ToString();
+			
+			static ComplexMatrix Hadamard();
+			static ComplexMatrix CNOT();
+			static ComplexMatrix Toffoli();
+			static ComplexMatrix UF();
     };
 }
 

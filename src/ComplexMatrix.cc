@@ -88,6 +88,8 @@ ComplexVector& ComplexMatrix::operator[](int idx)
 //working
 ComplexMatrix ComplexMatrix::Add(ComplexMatrix A)
 {
+	
+	// if I feel like it I will add in the scalars infront of a matrix.
    //this doesnt work
    //vector<ComplexVector> newMatrix = vector<ComplexVector>(row, column);
 
@@ -137,7 +139,9 @@ ComplexMatrix ComplexMatrix::Multiplication(ComplexMatrix A)
                 }
             }
         }
-
+		
+		ComplexNumber scale = (*this).Scalar() * A.Scalar(); 
+		tempMatrix.Scalar(scale);
     }
     else
     {
@@ -242,6 +246,9 @@ ComplexMatrix ComplexMatrix::TensorProduct(ComplexMatrix A)
         }
     }
 
+	ComplexNumber scale = (*this).Scalar() * A.Scalar();
+	newMatrix.Scalar(scale);
+
     return newMatrix;
 }
 ComplexVector ComplexMatrix::Scalar_Mult (ComplexNumber a)
@@ -298,4 +305,57 @@ std::string ComplexMatrix::ToString()
     }
 
     return msg;
+}
+
+ComplexMatrix ComplexMatrix::Hadamard()
+{
+	ComplexMatrix hadamard = ComplexMatrix(2, 2);
+	float number = 1.0 / sqrt(2);
+	ComplexNumber scale = ComplexNumber(number, 0);
+	
+	hadamard.Scalar(scale);
+	hadamard[0][0] = 1;
+	hadamard[0][1] = 1;
+	hadamard[1][0] = 1;
+	hadamard[1][1] = -1;
+	
+	return hadamard;
+}
+
+
+ComplexMatrix ComplexMatrix::CNOT()
+{
+	ComplexMatrix cnot = ComplexMatrix(4, 4);
+	cnot[0][0] = ComplexNumber(1);
+	cnot[1][1] = ComplexNumber(1);
+	cnot[2][3] = ComplexNumber(1);
+	cnot[3][2] = ComplexNumber(1);
+	return cnot;
+}
+
+ComplexMatrix ComplexMatrix::Toffoli()
+{
+	ComplexMatrix toffoli = ComplexMatrix(8, 8);
+	toffoli[0][0] = ComplexNumber(1);
+	toffoli[1][1] = ComplexNumber(1);
+	toffoli[2][2] = ComplexNumber(1);
+	toffoli[3][3] = ComplexNumber(1);
+	toffoli[4][4] = ComplexNumber(1);
+	toffoli[5][5] = ComplexNumber(1);
+	toffoli[6][7] = ComplexNumber(1);
+	toffoli[7][6] = ComplexNumber(1);
+
+	return toffoli;
+
+}
+
+ComplexMatrix ComplexMatrix::UF()
+{
+	ComplexMatrix UF= ComplexMatrix(4,4);
+	UF[0][1]= ComplexNumber(1);
+	UF[1][0]= ComplexNumber(1);
+	UF[2][2] = ComplexNumber(1);
+	UF[3][3] = ComplexNumber(1);
+
+	return UF;
 }
