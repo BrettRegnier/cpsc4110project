@@ -134,7 +134,10 @@ int main()
 	    break;
 	 }
 	 case 3:
-	 {  // Deutsch's algorithm function
+	 {  
+		 ComplexMatrix result3 = a.UF_function();
+		 cout << result3.ToString();
+		 cout << result3.Scalar().ToString();
 	    break;
 	 }
 	 default:

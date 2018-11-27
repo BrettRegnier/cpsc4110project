@@ -1,5 +1,6 @@
 #include "Interface.hh"
 #include <string>
+#include <cmath>
 
 using namespace ComplexSpace;
 using namespace std;
@@ -53,7 +54,7 @@ ComplexMatrix Interface::Toffoli(ComplexMatrix qubits)
 		// error
 	}
 }
-ComplexMatrix Interface:: UF( ComplexMatrix qubits)
+ComplexMatrix Interface:: UF(ComplexMatrix qubits)
 {
 	if (qubits.Row() == 4 && qubits.Column() == 1)
 	{
@@ -171,14 +172,64 @@ ComplexMatrix Interface:: Toffoli_function()
 
 ComplexMatrix Interface::UF_function()
 {
-   ComplexMatrix control_bit = ComplexMatrix(4,4);
-   ComplexMatrix target_bit = ComplexMatrix (4,4);
-
-   int input1;
-   int input2;
-   cout << "Please insert the controlbit " <<endl;
-   cin>> input1;
-   cout << "Please insert the target_bit " <<endl;
-   cin>>input2;
-   return control_bit;
+	try 
+	{
+		ComplexMatrix control_bit = ComplexMatrix(2,1);
+		ComplexMatrix target_bit = ComplexMatrix (2,1);
+		ComplexMatrix tensor_matrix;
+		ComplexMatrix temp;
+		
+		control_bit = qubit_input(control_bit, 0);
+		target_bit = qubit_input(target_bit, 1);
+		
+		control_bit = ComplexMatrix::Hadamard() * control_bit;
+		target_bit = ComplexMatrix::Hadamard() * target_bit;
+		
+		// (-1)^f(x)|x> (x) 1^(1/2)*(|0> - |1>)
+		int fx;
+		int fy;
+		cout << "Please insert the f(0) " <<endl;
+		cin >> fx;
+		cout << "Please insert the f(1) " <<endl;
+		cin >> fy;
+		
+		target_bit = control_bit.TensorProduct(control_bit);
+		
+		ComplexMatrix uf = ComplexMatrix(4, 4);
+		if (fx == 0 && fy == 0)
+		{
+			uf[0][0] = 1;
+			uf[1][1] = 1;
+			uf[2][2] = 1;
+			uf[3][3] = 1;
+		}
+		
+		target_bit = uf * target_bit;
+		
+		ComplexMatrix HI = ComplexMatrix::Hadamard().TensorProduct(ComplexMatrix::Identity());
+		target_bit = HI * target_bit;
+		
+		// 4 cases
+		// if f(0) = f(1) = 0
+		// if f(0) = f(1) = 1
+		// if f(0) = 0 and f(1) = 1
+		// if f(0) = 1 and f(1) = 0
+		
+		// Take
+		
+		// f is constant
+		// ComplexMatrix deutsch = ComplexMatrix(2, 1);
+		// deutsch[0][0] = ComplexNumber(pow((-1), fx)) * control_bit[0][0];
+		// deutsch[1][0] = ComplexNumber(pow((-1), fy)) * control_bit[1][0];
+		
+		// deutsch = ComplexMatrix::Hadamard() * deutsch;
+		
+   		// return deutsch;
+		   
+		return target_bit;
+	}
+	catch (const char* e)
+	{
+		cout << e << endl;
+	}
 }

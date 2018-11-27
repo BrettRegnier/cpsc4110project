@@ -359,3 +359,12 @@ ComplexMatrix ComplexMatrix::UF()
 
 	return UF;
 }
+
+ComplexMatrix ComplexMatrix::Identity()
+{
+	ComplexMatrix ident = ComplexMatrix(2, 2);
+	ident[0][0] = 1;
+	ident[1][1] = 1;
+	
+	return ident;
+}

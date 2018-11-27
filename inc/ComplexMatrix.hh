@@ -61,6 +61,7 @@ namespace ComplexSpace
 			static ComplexMatrix CNOT();
 			static ComplexMatrix Toffoli();
 			static ComplexMatrix UF();
+			static ComplexMatrix Identity();
     };
 }
 
