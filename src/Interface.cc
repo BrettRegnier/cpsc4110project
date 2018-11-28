@@ -17,7 +17,7 @@ Interface::~Interface()
 
 int Interface:: main_option()
 {
-   cout<< endl;
+   cout<< endl<<endl;
    cout << "Select an Option" << endl;
    cout << "1. Controlled-NOT " << endl;
    cout << "2. Toffoli Gate " << endl;
@@ -193,17 +193,49 @@ ComplexMatrix Interface::UF_function()
 		cout << "Please insert the f(1) " <<endl;
 		cin >> fy;
 		
-		target_bit = control_bit.TensorProduct(control_bit);
+		target_bit = control_bit.TensorProduct(target_bit);
 		
 		ComplexMatrix uf = ComplexMatrix(4, 4);
 		if (fx == 0 && fy == 0)
 		{
-			uf[0][0] = 1;
-			uf[1][1] = 1;
-			uf[2][2] = 1;
-			uf[3][3] = 1;
+		   uf[0][0] = 1;
+		   uf[1][1] = 1;
+		   uf[2][2] = 1;
+		   uf[3][3] = 1;
+		   cout<< endl << "F is constant" << endl<<endl;
 		}
-		
+		else if(fx == 0 && fy == 1)
+		{
+		   uf[0][0] = 1;
+		   uf[1][1] = 1;
+		   uf[2][3] = 1;
+		   uf[3][2] = 1;
+		   cout<< endl << "F is balanced" << endl<<endl;
+		   
+		}
+		else if (fx == 1 && fy == 0)
+		{
+		   uf[0][1] = 1;
+		   uf[1][0] = 1;
+		   uf[2][2] = 1;
+		   uf[3][3] = 1;
+		   cout<< endl << "F is balanced" << endl << endl;
+		   
+		}
+		else if (fx == 1 && fy ==1)
+		{
+		   uf[0][1] = 1;
+		   uf[1][0] = 1;
+		   uf[2][3] = 1;
+		   uf[3][2] = 1;
+		   cout<< endl << "F is constant" << endl<<endl;
+		   
+		}
+		else
+		{
+		   //wrong input
+		   cout<< "Please input either 1 or 0" << endl;
+		}
 		target_bit = uf * target_bit;
 		
 		ComplexMatrix HI = ComplexMatrix::Hadamard().TensorProduct(ComplexMatrix::Identity());
