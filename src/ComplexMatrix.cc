@@ -246,8 +246,8 @@ ComplexMatrix ComplexMatrix::TensorProduct(ComplexMatrix A)
         }
     }
 
-	ComplexNumber scale = (*this).Scalar() * A.Scalar();
-	newMatrix.Scalar(scale);
+	// ComplexNumber scale = (*this).Scalar() * A.Scalar();
+	// newMatrix.Scalar(scale);
 
     return newMatrix;
 }
