@@ -307,6 +307,39 @@ std::string ComplexMatrix::ToString()
     return msg;
 }
 
+ComplexMatrix ComplexMatrix::TensorDiv()
+{
+   
+   ComplexMatrix temp = ComplexMatrix(2,1);
+   ComplexMatrix first_bit= ComplexMatrix(2,1);
+   ComplexMatrix second_bit= ComplexMatrix(2,1);
+   first_bit[0][0]= 1;
+   second_bit[0][0]= 1;
+   second_bit[1][0]= -1;
+   
+   if(first_bit.TensorProduct(second_bit) == (*this))
+   {
+      temp= first_bit;
+   }
+   first_bit[0][0]=-1;
+   if( first_bit.TensorProduct(second_bit ) == (*this))
+   {
+     temp = first_bit;
+   }
+   first_bit[0][0]=0;
+   first_bit[1][0]=1;
+   if(first_bit.TensorProduct(second_bit) == (*this))
+   {
+      temp= first_bit;
+   }
+   first_bit[1][0]=-1;
+   if(first_bit.TensorProduct(second_bit) == (*this))
+   {
+      temp = first_bit;
+   }
+   return temp;
+}
+
 ComplexMatrix ComplexMatrix::Hadamard()
 {
 	ComplexMatrix hadamard = ComplexMatrix(2, 2);

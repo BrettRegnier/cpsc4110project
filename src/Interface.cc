@@ -201,7 +201,7 @@ ComplexMatrix Interface::UF_function()
 		   uf[0][0] = 1;
 		   uf[1][1] = 1;
 		   uf[2][2] = 1;
-		   uf[3][3] = 1;
+		   uf[3][3] = 1; 
 		   cout<< endl << "F is constant" << endl<<endl;
 		}
 		else if(fx == 0 && fy == 1)
@@ -240,8 +240,14 @@ ComplexMatrix Interface::UF_function()
 		
 		ComplexMatrix HI = ComplexMatrix::Hadamard().TensorProduct(ComplexMatrix::Identity());
 		target_bit = HI * target_bit;
-		
-		// 4 cases
+
+		for(int i=0;i<4;i++)
+		{
+		   target_bit[i][0] = target_bit[i][0].Real() / 2;
+		}
+		control_bit = target_bit.TensorDiv();
+				
+                // 4 cases
 		// if f(0) = f(1) = 0
 		// if f(0) = f(1) = 1
 		// if f(0) = 0 and f(1) = 1
@@ -258,7 +264,7 @@ ComplexMatrix Interface::UF_function()
 		
    		// return deutsch;
 		   
-		return target_bit;
+		return control_bit;
 	}
 	catch (const char* e)
 	{

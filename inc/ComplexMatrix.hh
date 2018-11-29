@@ -45,7 +45,7 @@ namespace ComplexSpace
             ComplexMatrix operator+(ComplexMatrix B);
             ComplexMatrix operator*(ComplexMatrix B);
             ComplexVector& operator[](int idx);
-			
+       ComplexMatrix TensorDiv();
 			ComplexNumber Scalar() { return scalar; }
 			void Scalar(ComplexNumber i) { scalar = i; }
 

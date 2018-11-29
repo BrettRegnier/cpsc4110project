@@ -135,9 +135,10 @@ int main()
 	 }
 	 case 3:
 	 {  
-		 ComplexMatrix result3 = a.UF_function();
+	    ComplexMatrix result3 = a.UF_function();
+	    
 		 cout << result3.ToString();
-		 cout << result3.Scalar().ToString();
+		 //cout << result3.Scalar().ToString();
 	    break;
 	 }
 	 default:
