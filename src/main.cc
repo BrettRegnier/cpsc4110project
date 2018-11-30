@@ -142,7 +142,10 @@ int main()
 	    break;
 	 }
 	 default:
+	 {
+	    cout<< endl<< "Wrong Input: Please Insert either 1, 2 or 3."<<endl;
 	    break;
+	 }
       }
    }
    
