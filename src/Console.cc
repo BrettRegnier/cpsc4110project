@@ -19,3 +19,21 @@ int Console::GetInteger(std::string msg)
 	std::cin >> in;
 	return in;
 }
+
+int Console::GetInteger(std::string msg, int expectedMax)
+{
+	int in = -1;
+	Println(msg);
+	Print("> ");
+	std::cin >> in;
+	
+	while (!std::cin)
+	{
+		std::cin.clear();
+		std::cin.ignore(100, '\n');
+		Println(msg);
+		Print("> ");
+		std::cin >> in;
+	}
+	return in;
+}

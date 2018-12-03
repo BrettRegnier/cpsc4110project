@@ -1,5 +1,4 @@
-#ifndef COMPLEXMATRIX_HH
-#define COMPLEXMATRIX_HH
+#pragma once
 
 #include <vector>
 #include "ComplexVector.hh"
@@ -65,5 +64,3 @@ namespace ComplexSpace
 			static ComplexMatrix Identity();
     };
 }
-
-#endif

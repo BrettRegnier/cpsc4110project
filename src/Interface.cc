@@ -17,13 +17,15 @@ Interface::~Interface()
 
 int Interface:: main_option()
 {
-   cout<< endl<<endl;
-   cout << "Select an Option" << endl;
-   cout << "1. Controlled-NOT " << endl;
-   cout << "2. Toffoli Gate " << endl;
-   cout << "3. Deutsch's Algorithm " << endl;
-   cout << "4. Exit " << endl;
-   cin >> option;
+   std::string msg = "\n\n";
+   msg += "Select an Option\n";
+   msg += "1. Controlled-NOT\n";
+   msg += "2. Toffoli Gate\n";
+   msg += "3. Deutsch's Algorithm\n";
+   msg += "4. Exit";
+   
+   option = Console::GetInteger(msg, 4);
+   
    return option;
 }
 
@@ -256,4 +258,46 @@ ComplexMatrix Interface::UF_function()
 	{
 		cout << e << endl;
 	}
+	
+}
+
+void Interface::Deutsch()
+{
+	int fx;
+	int fy;
+	
+	ComplexMatrix result;
+	ComplexMatrix target = create_qubit(0);
+	ComplexMatrix control = create_qubit(1);
+	
+	target = ComplexMatrix::Hadamard() * target;
+	control = ComplexMatrix::Hadamard() * control;
+	
+	fx = Console::GetInteger("Please enter f(0)");
+	fy = Console::GetInteger("Please enter f(1)");
+	
+	// (-1)^f(x)|x> (x) 1^(1/2)*(|0> - |1>)
+	ComplexNumber scalefx = pow(-1, fx);
+	ComplexNumber scalefy = pow(-1, fy);
+	
+	// apply fx on first state
+	target[0][0] = target[0][0] * scalefx;
+	
+	// apply fy on second state
+	target[1][0] = target[1][0] * scalefy;
+	
+	target = ComplexMatrix::Hadamard() * target;
+	
+	Console::Print("\n/****************************/");
+	Console::Println("\nTarget qubit \n" + target.ToString());
+	Console::Println("Control qubit \n" + control.ToString());
+	if (target[0][0].Real() > 0 || target[0][0].Real() < 0)
+	{
+		Console::Println("F is constant");
+	}
+	else if (target[1][0].Real() > 0 || target[1][0].Real() < 0)
+	{
+		Console::Println("F is balanced");
+	}
+	Console::Print("/****************************/");	
 }

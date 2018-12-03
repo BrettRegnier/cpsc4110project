@@ -1,6 +1,4 @@
-
-#ifndef INTERFACE_HH
-#define INTERFACE_HH
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -28,9 +26,9 @@ namespace ComplexSpace
 		ComplexMatrix Toffoli(ComplexMatrix qubits);
 		ComplexMatrix UF(ComplexMatrix qubits);
 		ComplexMatrix UF_function();
+		void Deutsch();
 
 		//ComplexMatrix parsing(string input);
 		void draw();
 	};
 }
-#endif

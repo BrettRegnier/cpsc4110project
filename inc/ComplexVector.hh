@@ -1,6 +1,4 @@
-
-#ifndef COMPLEXVECTOR_HH
-#define COMPLEXVECTOR_HH
+#pragma once 
 
 #include <vector>
 #include "ComplexNumber.hh"
@@ -29,5 +27,3 @@ namespace ComplexSpace
             std::string ToString();
     };
 }
-
-#endif

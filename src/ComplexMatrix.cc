@@ -141,7 +141,9 @@ ComplexMatrix ComplexMatrix::Multiplication(ComplexMatrix A)
         }
 		
 		ComplexNumber scale = (*this).Scalar() * A.Scalar(); 
-		tempMatrix.Scalar(scale);
+        tempMatrix.Scalar(scale);
+        
+        
     }
     else
     {
@@ -298,6 +300,8 @@ int ComplexMatrix::Column()
 std::string ComplexMatrix::ToString()
 {
     std::string msg = "";
+    
+    msg = "Scalar: " + scalar.ToString() + "\n";
 
     for (int i = 0; i < Row(); i++)
     {

@@ -1,5 +1,4 @@
-#ifndef COMPLEXNUMBER_HH
-#define COMPLEXNUMBER_HH
+#pragma once
 
 #include <sstream>
 #include <cmath>
@@ -36,5 +35,3 @@ namespace ComplexSpace
             std::string ToString();
     };
 }
-
-#endif
