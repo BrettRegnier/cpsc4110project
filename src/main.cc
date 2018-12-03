@@ -141,6 +141,12 @@ int main()
 		 //cout << result3.Scalar().ToString();
 	    break;
 	 }
+	 case 4:
+	 {
+	    cout<<endl<< "Program Terminated" << endl;
+	    return -1;
+	    break;
+	 }
 	 default:
 	 {
 	    cout<< endl<< "Wrong Input: Please Insert either 1, 2 or 3."<<endl;

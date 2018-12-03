@@ -22,7 +22,7 @@ int Interface:: main_option()
    cout << "1. Controlled-NOT " << endl;
    cout << "2. Toffoli Gate " << endl;
    cout << "3. Deutsch's Algorithm " << endl;
-
+   cout << "4. Exit " << endl;
    cin >> option;
    return option;
 }

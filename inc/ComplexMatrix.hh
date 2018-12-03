@@ -38,6 +38,7 @@ namespace ComplexSpace
             ComplexMatrix Transpose();
             ComplexMatrix Adjoint();
             ComplexVector Scalar_Mult(ComplexNumber a);
+
        
             float ExpectedValue(ComplexMatrix hermitian);
 
