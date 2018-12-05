@@ -2,7 +2,7 @@
 
 void Console::Print(std::string msg)
 {
-	std::cout << msg; 
+	std::cout << msg;
 }
 
 void Console::Println(std::string msg)
@@ -26,7 +26,7 @@ int Console::GetInteger(std::string msg, int expectedMax)
 	Println(msg);
 	Print("> ");
 	std::cin >> in;
-	
+
 	while (!std::cin)
 	{
 		std::cin.clear();

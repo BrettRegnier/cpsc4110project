@@ -16,15 +16,13 @@ ComplexMatrix::ComplexMatrix(int r, int c)
             v[i].v.push_back(ComplexNumber());
         }
     }
-    
+
     scalar = ComplexNumber(1, 0);
 }
 
 //working
 ComplexMatrix::ComplexMatrix(std::vector<ComplexVector> k)
 {
-    // Require error checking that the input doesn't have unaligned sizes of rows
-    // and columns
     v = k;
     scalar = ComplexNumber(1, 0);
 }
@@ -39,7 +37,7 @@ ComplexMatrix::~ComplexMatrix()
 //working
 bool ComplexMatrix::CheckDimension(ComplexMatrix A)
 {
-   return Row() == A.Row() && Column() == A.Column();
+    return Row() == A.Row() && Column() == A.Column();
 }
 
 bool ComplexMatrix::IsSquare()
@@ -50,6 +48,7 @@ bool ComplexMatrix::IsSquare()
 //working
 bool ComplexMatrix::operator==(ComplexMatrix B)
 {
+    // Checks if every value in each [row][column] are equal
     if (Row() == B.Row() && Column() == B.Column())
     {
         for (int i = 0; i < Row(); i++)
@@ -65,7 +64,7 @@ bool ComplexMatrix::operator==(ComplexMatrix B)
 
         return true;
     }
-    
+
     return false;
 }
 
@@ -79,42 +78,37 @@ ComplexMatrix ComplexMatrix::operator*(ComplexMatrix B)
     return Multiplication(B);
 }
 
-ComplexVector& ComplexMatrix::operator[](int idx)
+ComplexVector &ComplexMatrix::operator[](int idx)
 {
-    // error checking?
-    return v[idx];
+    if (idx < Row())
+    {
+        return v[idx];
+    }
+    else
+    {
+        throw "Out of index range";
+    }
 }
 
 //working
 ComplexMatrix ComplexMatrix::Add(ComplexMatrix A)
 {
-	
-	// if I feel like it I will add in the scalars infront of a matrix.
-   //this doesnt work
-   //vector<ComplexVector> newMatrix = vector<ComplexVector>(row, column);
-
-   vector<ComplexVector> newMatrix;
-   if(CheckDimension(A))
-   {
-     
-        for(int i = 0; i < Row(); i++)
+    vector<ComplexVector> newMatrix;
+    if (CheckDimension(A))
+    {
+        // we just use the built in vector addition for each row.
+        for (int i = 0; i < Row(); i++)
         {
-	   
-	   ComplexVector added = v[i].Add(A.v[i]);
-	   newMatrix.push_back(added);
-	   
+            ComplexVector added = (*this)[i].Add(A[i]);
+            newMatrix.push_back(added);
         }
-     }
+    }
     else
     {
-       cout<< "Dimension is not appropriate"<< endl;
-	}
-    //edit
+        cout << "Dimension is not appropriate" << endl;
+    }
     ComplexMatrix temp = ComplexMatrix(newMatrix);
     return temp;
-    
-    //before
-    //return ComplexMatrix(newMatrix);
 }
 
 ComplexMatrix ComplexMatrix::Multiplication(ComplexMatrix A)
@@ -139,15 +133,13 @@ ComplexMatrix ComplexMatrix::Multiplication(ComplexMatrix A)
                 }
             }
         }
-		
-		ComplexNumber scale = (*this).Scalar() * A.Scalar(); 
+
+        ComplexNumber scale = (*this).Scalar() * A.Scalar();
         tempMatrix.Scalar(scale);
-        
-        
     }
     else
     {
-        // throw error
+        throw "For matrix multiplication A*B, the the columns of A do not equal the Rows of B";
     }
     return tempMatrix;
 }
@@ -160,7 +152,7 @@ bool ComplexMatrix::IsHermitian()
     }
     else
     {
-        // error can't check if hermitian because not square
+        throw "The matrix is not a square, therefore it is not a hermitian";
     }
 }
 
@@ -172,7 +164,7 @@ bool ComplexMatrix::IsUnitary()
     }
     else
     {
-        // error
+        throw "The matrix is not a square, therefore it is not a unitary";
     }
 }
 
@@ -180,8 +172,6 @@ bool ComplexMatrix::IsIdentity()
 {
     if (IsSquare())
     {
-        // Might need a check that the matrix is not a 0 by 0, 
-        // unless we have the checks in the constructor
         // Could iterate through row or column since they are square.
         for (int i = 0; i < Row(); i++)
             if (v[i][i].Real() != 1)
@@ -191,7 +181,7 @@ bool ComplexMatrix::IsIdentity()
     }
     else
     {
-        // error
+        throw "The matrix is not a square, therefore it is not an identity";
     }
 }
 
@@ -199,7 +189,7 @@ float ComplexMatrix::ExpectedValue(ComplexMatrix hermitian)
 {
     if (hermitian.IsHermitian())
     {
-        // Multiply the hermitian and the matrix together. 
+        // Multiply the hermitian and the matrix together.
         ComplexMatrix result = Multiplication(hermitian);
 
         // Calculate the dot product of this * this*hermitian
@@ -211,7 +201,7 @@ float ComplexMatrix::ExpectedValue(ComplexMatrix hermitian)
     }
     else
     {
-        // error
+        throw "The inputted matrix is not a hermitian";
     }
 }
 
@@ -220,8 +210,8 @@ ComplexMatrix ComplexMatrix::Conjugate()
     ComplexMatrix conj = ComplexMatrix(Row(), Column());
     for (int i = 0; i < Column(); i++)
     {
-       //conj.v.push_back(v[i].Conjugate());
-       conj.v[i]= v[i].Conjugate();
+        //conj.v.push_back(v[i].Conjugate());
+        conj.v[i] = v[i].Conjugate();
     }
 
     return conj;
@@ -244,28 +234,26 @@ ComplexMatrix ComplexMatrix::TensorProduct(ComplexMatrix A)
     {
         for (int j = 0; j < newColumns; j++)
         {
-            newMatrix[i][j] = (*this)[i/nRows][j/mRows] * A[i%nRows][j%mRows];
+            newMatrix[i][j] = (*this)[i / nRows][j / mRows] * A[i % nRows][j % mRows];
         }
     }
 
-	// ComplexNumber scale = (*this).Scalar() * A.Scalar();
-	// newMatrix.Scalar(scale);
+    ComplexNumber scale = (*this).Scalar() * A.Scalar();
+    newMatrix.Scalar(scale);
 
     return newMatrix;
 }
-ComplexVector ComplexMatrix::Scalar_Mult (ComplexNumber a)
+ComplexVector ComplexMatrix::Scalar_Mult(ComplexNumber a)
 {
-    //ComplexMatrix temp= ComplexMatrix(Row(), Column());
-    ComplexVector temp= ComplexVector();
-    for (int i = 0; i<Row();i++)
+    ComplexVector temp = ComplexVector();
+    for (int i = 0; i < Row(); i++)
     {
-        for(int j=0; j<Column(); j++)
+        for (int j = 0; j < Column(); j++)
         {
-            //temp.v[i].v[j]= a.Product(v[i].v[j]);
             temp.v.push_back(a.Product(v[i].v[j]));
         }
     }
-   return temp;
+    return temp;
 }
 
 ComplexMatrix ComplexMatrix::Transpose()
@@ -300,7 +288,7 @@ int ComplexMatrix::Column()
 std::string ComplexMatrix::ToString()
 {
     std::string msg = "";
-    
+
     msg = "Scalar: " + scalar.ToString() + "\n";
 
     for (int i = 0; i < Row(); i++)
@@ -313,95 +301,93 @@ std::string ComplexMatrix::ToString()
 
 ComplexMatrix ComplexMatrix::TensorDiv()
 {
-   
-   ComplexMatrix temp = ComplexMatrix(2,1);
-   ComplexMatrix first_bit= ComplexMatrix(2,1);
-   ComplexMatrix second_bit= ComplexMatrix(2,1);
-   first_bit[0][0]= 1;
-   second_bit[0][0]= 1;
-   second_bit[1][0]= -1;
-   
-   if(first_bit.TensorProduct(second_bit) == (*this))
-   {
-      temp= first_bit;
-   }
-   first_bit[0][0]=-1;
-   if( first_bit.TensorProduct(second_bit ) == (*this))
-   {
-     temp = first_bit;
-   }
-   first_bit[0][0]=0;
-   first_bit[1][0]=1;
-   if(first_bit.TensorProduct(second_bit) == (*this))
-   {
-      temp= first_bit;
-   }
-   first_bit[1][0]=-1;
-   if(first_bit.TensorProduct(second_bit) == (*this))
-   {
-      temp = first_bit;
-   }
-   return temp;
+
+    ComplexMatrix temp = ComplexMatrix(2, 1);
+    ComplexMatrix first_bit = ComplexMatrix(2, 1);
+    ComplexMatrix second_bit = ComplexMatrix(2, 1);
+    first_bit[0][0] = 1;
+    second_bit[0][0] = 1;
+    second_bit[1][0] = -1;
+
+    if (first_bit.TensorProduct(second_bit) == (*this))
+    {
+        temp = first_bit;
+    }
+    first_bit[0][0] = -1;
+    if (first_bit.TensorProduct(second_bit) == (*this))
+    {
+        temp = first_bit;
+    }
+    first_bit[0][0] = 0;
+    first_bit[1][0] = 1;
+    if (first_bit.TensorProduct(second_bit) == (*this))
+    {
+        temp = first_bit;
+    }
+    first_bit[1][0] = -1;
+    if (first_bit.TensorProduct(second_bit) == (*this))
+    {
+        temp = first_bit;
+    }
+    return temp;
 }
 
 ComplexMatrix ComplexMatrix::Hadamard()
 {
-	ComplexMatrix hadamard = ComplexMatrix(2, 2);
-	float number = 1.0 / sqrt(2);
-	ComplexNumber scale = ComplexNumber(number, 0);
-	
-	hadamard.Scalar(scale);
-	hadamard[0][0] = 1;
-	hadamard[0][1] = 1;
-	hadamard[1][0] = 1;
-	hadamard[1][1] = -1;
-	
-	return hadamard;
-}
+    ComplexMatrix hadamard = ComplexMatrix(2, 2);
+    float number = 1.0 / sqrt(2);
+    ComplexNumber scale = ComplexNumber(number, 0);
 
+    hadamard.Scalar(scale);
+    hadamard[0][0] = 1;
+    hadamard[0][1] = 1;
+    hadamard[1][0] = 1;
+    hadamard[1][1] = -1;
+
+    return hadamard;
+}
 
 ComplexMatrix ComplexMatrix::CNOT()
 {
-	ComplexMatrix cnot = ComplexMatrix(4, 4);
-	cnot[0][0] = ComplexNumber(1);
-	cnot[1][1] = ComplexNumber(1);
-	cnot[2][3] = ComplexNumber(1);
-	cnot[3][2] = ComplexNumber(1);
-	return cnot;
+    ComplexMatrix cnot = ComplexMatrix(4, 4);
+    cnot[0][0] = ComplexNumber(1);
+    cnot[1][1] = ComplexNumber(1);
+    cnot[2][3] = ComplexNumber(1);
+    cnot[3][2] = ComplexNumber(1);
+    return cnot;
 }
 
 ComplexMatrix ComplexMatrix::Toffoli()
 {
-	ComplexMatrix toffoli = ComplexMatrix(8, 8);
-	toffoli[0][0] = ComplexNumber(1);
-	toffoli[1][1] = ComplexNumber(1);
-	toffoli[2][2] = ComplexNumber(1);
-	toffoli[3][3] = ComplexNumber(1);
-	toffoli[4][4] = ComplexNumber(1);
-	toffoli[5][5] = ComplexNumber(1);
-	toffoli[6][7] = ComplexNumber(1);
-	toffoli[7][6] = ComplexNumber(1);
+    ComplexMatrix toffoli = ComplexMatrix(8, 8);
+    toffoli[0][0] = ComplexNumber(1);
+    toffoli[1][1] = ComplexNumber(1);
+    toffoli[2][2] = ComplexNumber(1);
+    toffoli[3][3] = ComplexNumber(1);
+    toffoli[4][4] = ComplexNumber(1);
+    toffoli[5][5] = ComplexNumber(1);
+    toffoli[6][7] = ComplexNumber(1);
+    toffoli[7][6] = ComplexNumber(1);
 
-	return toffoli;
-
+    return toffoli;
 }
 
 ComplexMatrix ComplexMatrix::UF()
 {
-	ComplexMatrix UF= ComplexMatrix(4,4);
-	UF[0][1]= ComplexNumber(1);
-	UF[1][0]= ComplexNumber(1);
-	UF[2][2] = ComplexNumber(1);
-	UF[3][3] = ComplexNumber(1);
+    ComplexMatrix UF = ComplexMatrix(4, 4);
+    UF[0][1] = ComplexNumber(1);
+    UF[1][0] = ComplexNumber(1);
+    UF[2][2] = ComplexNumber(1);
+    UF[3][3] = ComplexNumber(1);
 
-	return UF;
+    return UF;
 }
 
 ComplexMatrix ComplexMatrix::Identity()
 {
-	ComplexMatrix ident = ComplexMatrix(2, 2);
-	ident[0][0] = 1;
-	ident[1][1] = 1;
-	
-	return ident;
+    ComplexMatrix ident = ComplexMatrix(2, 2);
+    ident[0][0] = 1;
+    ident[1][1] = 1;
+
+    return ident;
 }

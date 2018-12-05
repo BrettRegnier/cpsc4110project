@@ -3,8 +3,8 @@ using namespace ComplexSpace;
 
 ComplexNumber::ComplexNumber(float r, float i)
 {
-   real = r;
-   imaginary = i;
+    real = r;
+    imaginary = i;
 }
 
 ComplexNumber::~ComplexNumber()
@@ -21,7 +21,6 @@ ComplexNumber ComplexNumber::operator*(ComplexNumber x)
     return Product(x);
 }
 
-
 bool ComplexNumber::operator==(ComplexNumber i)
 {
     if (real == i.real && imaginary == i.imaginary)
@@ -32,18 +31,23 @@ bool ComplexNumber::operator==(ComplexNumber i)
 
 ComplexNumber ComplexNumber::Add(ComplexNumber x)
 {
-   ComplexNumber a;
-   a.real = x.real + real;
-   a.imaginary = x.imaginary + imaginary;
-   return a;
+    ComplexNumber a;
+    a.real = x.real + real;
+    a.imaginary = x.imaginary + imaginary;
+    return a;
 }
 
 ComplexNumber ComplexNumber::Product(ComplexNumber x)
 {
-   ComplexNumber a;
-   a.real = (x.real * real) + (x.imaginary * imaginary * - 1);
-   a.imaginary = (x.imaginary * real) +(x.real * imaginary);
-   return a;
+    ComplexNumber a;
+    
+    // The real of the result is equal to the two complex numbers reals multiplied with each other plus the the imaginaries multiplied together
+    // we negate the imaginary multiplication because i^2 is = -1.
+    a.real = (x.real * real) + (x.imaginary * imaginary * -1);
+    
+    // (x + yi) * (z + ci)
+    a.imaginary = (x.imaginary * real) + (x.real * imaginary);
+    return a;
 }
 
 float ComplexNumber::Modulus()
@@ -53,7 +57,7 @@ float ComplexNumber::Modulus()
 
 ComplexNumber ComplexNumber::Conjugate()
 {
-    ComplexNumber a = ComplexNumber(real, imaginary*-1);
+    ComplexNumber a = ComplexNumber(real, imaginary * -1);
     return a;
 }
 
@@ -81,7 +85,7 @@ std::string ComplexNumber::ToString()
 {
     std::ostringstream stream;
     if (imaginary < 0)
-        stream << real << " - " << imaginary*-1 << "i";
+        stream << real << " - " << imaginary * -1 << "i";
     else
         stream << real << " + " << imaginary << "i";
 
